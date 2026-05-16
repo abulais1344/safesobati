@@ -43,10 +43,8 @@ export function DriverOnboardingForm() {
   });
 
   const watchedBrand = watch("vehicleBrand") as VehicleBrand;
-  const watchedModel = watch("vehicleModel");
   const models = getModelsByBrand(watchedBrand);
   const isCustomBrand = watchedBrand === "other";
-  const isCustomModel = watchedModel === "other" || (isCustomBrand && watchedModel);
 
   const uploadDocument = async (file: File, fileType: "aadhaar" | "license" | "rc") => {
     const signedUrlResponse = await fetch("/api/uploads/signed-url", {
