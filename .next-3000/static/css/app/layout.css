@@ -2078,6 +2078,11 @@ footer {
     padding-bottom: 5rem;
   }
 
+  .sm\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
   .sm\:pt-10 {
     padding-top: 2.5rem;
   }

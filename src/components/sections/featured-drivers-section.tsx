@@ -12,9 +12,9 @@ export function FeaturedDriversSection() {
     <section className="py-16 sm:py-20">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Featured Drivers"
-          title="Meet the trusted captains powering local mobility"
-          description="Human-first profiles, verified identity, and transparent service quality for every booking."
+          badge="Live Now"
+          title="Meet live drivers near you"
+          description="Verified drivers with photos - see who's responding to your ride request."
         />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-2">

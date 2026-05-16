@@ -1,3 +1,6 @@
 {
-  "/api/marketplace/metrics/route": "app/api/marketplace/metrics/route.js"
+  "/api/marketplace/metrics/route": "app/api/marketplace/metrics/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
+  "/page": "app/page.js"
 }

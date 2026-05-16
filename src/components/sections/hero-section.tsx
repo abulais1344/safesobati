@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Clock3, MapPinned, Shield, Sparkles, Zap } from "lucide-react";
 import { FadeIn } from "@/components/motion/fade-in";
-import { RideSearchForm } from "@/components/forms/ride-search-form";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { heroStats } from "@/lib/constants";
@@ -100,11 +100,7 @@ export function HeroSection() {
           </FadeIn>
         </div>
 
-        <FadeIn className="mt-6" delay={0.1}>
-          <RideSearchForm />
-        </FadeIn>
-
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {heroStats.map((item, index) => (
             <FadeIn key={index} delay={0.05 * index}>
               <div className="rounded-2xl border border-amber-200/80 bg-white/80 p-4 text-slate-900 backdrop-blur-2xl dark:border-white/20 dark:bg-white/10 dark:text-white">
