@@ -65,7 +65,7 @@ export function RideSearchForm({ compact = false }: RideSearchFormProps) {
 
         <div>
           <select
-            className="h-11 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-11 w-full rounded-xl border border-amber-200/80 bg-white/85 px-3 text-sm text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100"
             {...register("tripType")}
           >
             {tripTypeKeys.map((item) => (
@@ -89,7 +89,7 @@ export function RideSearchForm({ compact = false }: RideSearchFormProps) {
           </Button>
         </div>
       </form>
-      {submitted ? <p className="mt-3 text-sm text-emerald-700">{t("search_result_msg")}</p> : null}
+      {submitted ? <p className="mt-3 text-sm text-teal-700 dark:text-teal-300">{t("search_result_msg")}</p> : null}
     </Card>
   );
 }

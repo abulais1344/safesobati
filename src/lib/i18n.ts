@@ -24,7 +24,7 @@ export const translations = {
     hero_badge: "Nanded Live Marketplace",
     hero_headline: "Local Rides You Can Trust, Real Drivers Responding In Minutes.",
     hero_desc:
-      "Compare verified quote offers from nearby drivers, chat on WhatsApp, and book with full confidence — for city runs, full-day weddings, hospital visits, Hyderabad airport drops and outstation travel.",
+      "Get instant quotes from verified local drivers. Book confirmed rides for city trips, weddings, hospital visits, airport transfers & more.",
     hero_cta_primary: "Request quote now",
     hero_cta_secondary: "Explore cars",
     hero_chip_verified: "Only verified drivers",
@@ -124,7 +124,7 @@ export const translations = {
     hero_badge: "नांदेड़ लाइव मार्केटप्लेस",
     hero_headline: "विश्वसनीय स्थानीय सवारी — असली ड्राइवर, मिनटों में जवाब।",
     hero_desc:
-      "नज़दीकी सत्यापित ड्राइवरों के दर देखें, WhatsApp पर बात करें और शादी, रुग्णालय, हैदराबाद एयरपोर्ट या आउटस्टेशन के लिए कार बुक करें।",
+      "नज़दीकी सत्यापित ड्राइवरों से तुरंत दाम पाएं। शहरी सवारी, शादी, अस्पताल, एयरपोर्ट और बाहरी यात्राओं के लिए बुक करें।",
     hero_cta_primary: "अभी कोटेशन माँगें",
     hero_cta_secondary: "गाड़ियाँ देखें",
     hero_chip_verified: "सिर्फ सत्यापित ड्राइवर",
@@ -223,7 +223,7 @@ export const translations = {
     hero_badge: "नांदेड लाइव्ह मार्केटप्लेस",
     hero_headline: "विश्वासार्ह स्थानिक सवारी — खरे चालक, मिनिटांत प्रतिसाद।",
     hero_desc:
-      "जवळच्या सत्यापित चालकांचे दर पाहा, WhatsApp वर बोला आणि लग्न, रुग्णालय, हैदराबाद विमानतळ किंवा बाहेरगावासाठी कार बुक करा।",
+      "जवळच्या सत्यापित चालकांचे तात्काळ दाम मिळवा. शहरी सवारी, लग्न, रुग्णालय, विमानतळ व बाहेरगावासाठी बुक करा।",
     hero_cta_primary: "आत्ता कोटेशन मागवा",
     hero_cta_secondary: "गाड्या पाहा",
     hero_chip_verified: "फक्त सत्यापित चालक",

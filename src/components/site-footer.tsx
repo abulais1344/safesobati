@@ -2,18 +2,18 @@ import Link from "next/link";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-slate-200/70 bg-white/70 py-10 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/70">
+    <footer className="border-t border-amber-200/60 bg-[#fff8ef]/85 py-10 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/75">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
-          <h3 className="text-base font-semibold">SafeSobati</h3>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white">SafeSobati</h3>
+          <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
             Startup-grade trusted mobility platform for tier-2 and tier-3 India.
           </p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Company</h4>
-          <ul className="mt-2 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Company</h4>
+          <ul className="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-300">
             <li>
               <Link href="/about">About</Link>
             </li>
@@ -27,8 +27,11 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Platform</h4>
-          <ul className="mt-2 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Platform</h4>
+          <ul className="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            <li>
+              <Link href="/live-activity">Live activity</Link>
+            </li>
             <li>
               <Link href="/search">Search rides</Link>
             </li>
@@ -45,8 +48,8 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Legal</h4>
-          <ul className="mt-2 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Legal</h4>
+          <ul className="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-300">
             <li>
               <Link href="/terms">Terms</Link>
             </li>
@@ -59,7 +62,7 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <p className="mt-10 text-center text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-10 text-center text-xs text-slate-600 dark:text-slate-400">
         © {new Date().getFullYear()} SafeSobati Technologies Pvt. Ltd. All rights reserved.
       </p>
     </footer>
