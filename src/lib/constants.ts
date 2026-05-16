@@ -124,7 +124,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "55 min",
     baseFare: "INR 1,200",
     image:
-      "https://images.unsplash.com/photo-1526726538690-5cbf956ae2fd?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
@@ -133,7 +133,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "22 min",
     baseFare: "INR 220",
     image:
-      "https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
@@ -142,7 +142,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "14 min",
     baseFare: "INR 180",
     image:
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1464207687429-7505649dae38?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
@@ -151,7 +151,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "1 hr 22 min",
     baseFare: "INR 2,250",
     image:
-      "https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
@@ -160,7 +160,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "2 hr 45 min",
     baseFare: "INR 4,900",
     image:
-      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1533473359331-35acda7ce3c1?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
@@ -169,7 +169,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "5 hr 20 min",
     baseFare: "INR 8,400",
     image:
-      "https://images.unsplash.com/photo-1556122071-e404cb6f31dc?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -215,7 +215,7 @@ export const featuredDrivers: FeaturedDriver[] = [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=480&q=80",
     vehicleModel: "Maruti Dzire 2022",
     vehicleImage:
-      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=80",
     eta: "6 min",
     seats: 4,
     ac: true,
@@ -232,7 +232,7 @@ export const featuredDrivers: FeaturedDriver[] = [
       "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=480&q=80",
     vehicleModel: "Hyundai Aura 2023",
     vehicleImage:
-      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
     eta: "8 min",
     seats: 4,
     ac: true,
@@ -249,7 +249,7 @@ export const featuredDrivers: FeaturedDriver[] = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=480&q=80",
     vehicleModel: "Tata Tigor EV",
     vehicleImage:
-      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1488070537510-e21cc028cb29?auto=format&fit=crop&w=1200&q=80",
     eta: "9 min",
     seats: 4,
     ac: true,
@@ -266,7 +266,7 @@ export const featuredDrivers: FeaturedDriver[] = [
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=480&q=80",
     vehicleModel: "Toyota Innova",
     vehicleImage:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1464207687429-7505649dae38?auto=format&fit=crop&w=1200&q=80",
     eta: "11 min",
     seats: 6,
     ac: true,
