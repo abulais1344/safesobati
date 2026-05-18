@@ -1,16 +1,21 @@
+"use client";
+
 import { FadeIn } from "@/components/motion/fade-in";
+import { useLanguage } from "@/components/providers/language-provider";
 import { SectionHeading } from "@/components/section-heading";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { trustFeatures } from "@/lib/constants";
 
 export function TrustSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-16 sm:py-20">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Trust & Safety"
-          title="Every ride starts with verification and accountability"
-          description="Safety architecture designed for Indian families, professionals and late-hour riders."
+          badge={t("trust_badge")}
+          title={t("trust_title")}
+          description={t("trust_desc")}
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">

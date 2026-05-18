@@ -6,7 +6,7 @@ const fallbackMetrics = {
   driversAvailable: 0,
   rideRequests: 0,
   activeQuotes: 0,
-  acceptedRides: 0,
+  confirmedRides: 0,
   citiesActive: 0,
 };
 

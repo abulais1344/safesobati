@@ -8,7 +8,7 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     const { data, error } = await supabaseAdmin
       .from("driver_quotes")
       .select(
-        "id, quote_amount, message, status, created_at, driver_id, drivers!inner(id, rating, status, user_id, users!inner(name, phone, city))"
+        "id, quote_amount, message, status, created_at, driver_id, drivers!inner(id, rating, status, user_id, users!inner(name, city))"
       )
       .eq("ride_request_id", id)
       .order("quote_amount", { ascending: true });

@@ -11,6 +11,13 @@ type Quote = {
   message: string | null;
   status: "active" | "accepted" | "rejected" | "expired";
   created_at: string;
+  drivers?: {
+    rating: number;
+    users?: {
+      name: string;
+      city: string;
+    };
+  };
 };
 
 type Props = {
@@ -58,7 +65,7 @@ export function CustomerQuotesPanel({ requestId }: Props) {
       return;
     }
 
-    setMessage("Quote accepted. Driver has been assigned.");
+    setMessage("Driver confirmed. Contact details are now unlocked for this booking.");
     setAcceptingQuoteId(null);
     await loadQuotes();
   };
@@ -69,7 +76,7 @@ export function CustomerQuotesPanel({ requestId }: Props) {
         <div>
           <h3 className="text-lg font-semibold">Quotes for request {requestId}</h3>
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            Refresh to get latest driver offers and accept one instantly.
+            Compare offers safely. Driver and customer contact details unlock only after confirmation.
           </p>
         </div>
         <Button variant="secondary" onClick={loadQuotes} disabled={loading}>
@@ -99,6 +106,14 @@ export function CustomerQuotesPanel({ requestId }: Props) {
                 <p className="text-xl font-semibold">INR {quote.quote_amount}</p>
                 <p className="text-xs uppercase tracking-wide text-slate-500">{quote.status}</p>
               </div>
+              {quote.drivers?.users?.name ? (
+                <p className="mt-1 text-sm font-medium text-slate-700 dark:text-slate-200">
+                  {quote.drivers.users.name} • {quote.drivers.users.city}
+                </p>
+              ) : null}
+              {typeof quote.drivers?.rating === "number" ? (
+                <p className="mt-1 text-xs text-slate-500">Driver rating {quote.drivers.rating}</p>
+              ) : null}
               {quote.message ? (
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{quote.message}</p>
               ) : null}
@@ -108,7 +123,7 @@ export function CustomerQuotesPanel({ requestId }: Props) {
                   onClick={() => acceptQuote(quote.id)}
                   disabled={acceptingQuoteId === quote.id}
                 >
-                  {acceptingQuoteId === quote.id ? "Accepting" : "Accept quote"}
+                  {acceptingQuoteId === quote.id ? "Confirming" : "Confirm this driver"}
                 </Button>
               ) : null}
             </div>

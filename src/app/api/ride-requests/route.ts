@@ -8,7 +8,16 @@ type RideRequestCreatePayload = {
   city: string;
   pickup: string;
   drop: string;
-  tripType: "city" | "airport" | "station" | "outstation" | "religious";
+  tripType:
+    | "city"
+    | "airport"
+    | "station"
+    | "outstation"
+    | "religious"
+    | "full_day"
+    | "half_day"
+    | "evening"
+    | "hospital";
   schedule: string;
   notes?: string;
 };

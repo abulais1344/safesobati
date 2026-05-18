@@ -5,7 +5,7 @@ export type MarketplaceMetrics = {
   driversAvailable: number;
   rideRequests: number;
   activeQuotes: number;
-  acceptedRides: number;
+  confirmedRides: number;
   citiesActive: number;
 };
 
@@ -25,13 +25,13 @@ async function countRows(table: string, filter?: { column: string; value: string
 }
 
 export async function getMarketplaceMetrics(): Promise<MarketplaceMetrics> {
-  const [driversApproved, driversAvailable, rideRequests, activeQuotes, acceptedRides, citiesData] =
+  const [driversApproved, driversAvailable, rideRequests, activeQuotes, confirmedRides, citiesData] =
     await Promise.all([
       countRows("drivers", { column: "status", value: "approved" }),
       countRows("drivers", { column: "available", value: true }),
       countRows("ride_requests"),
       countRows("driver_quotes", { column: "status", value: "active" }),
-      countRows("ride_requests", { column: "status", value: "accepted" }),
+      countRows("ride_requests", { column: "status", value: "confirmed" }),
       supabaseAdmin.from("ride_requests").select("city"),
     ]);
 
@@ -46,7 +46,7 @@ export async function getMarketplaceMetrics(): Promise<MarketplaceMetrics> {
     driversAvailable,
     rideRequests,
     activeQuotes,
-    acceptedRides,
+    confirmedRides,
     citiesActive,
   };
 }

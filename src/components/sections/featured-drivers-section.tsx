@@ -1,24 +1,33 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheck, CarFront, Clock3, Languages, MapPin, MessageCircle, Sofa, Star } from "lucide-react";
+import { BadgeCheck, CarFront, Clock3, Languages, MapPin, Sofa, Star } from "lucide-react";
 import { FadeIn } from "@/components/motion/fade-in";
+import { useLanguage } from "@/components/providers/language-provider";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { featuredDrivers } from "@/lib/constants";
+import type { MarketplaceDriver } from "@/lib/marketplace-drivers";
 
-export function FeaturedDriversSection() {
+type FeaturedDriversSectionProps = {
+  drivers: MarketplaceDriver[];
+};
+
+export function FeaturedDriversSection({ drivers }: FeaturedDriversSectionProps) {
+  const { t } = useLanguage();
+
   return (
-    <section className="py-16 sm:py-20">
+    <section className="py-10 sm:py-14">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Live Now"
-          title="Meet live drivers near you"
-          description="Verified drivers with photos - see who's responding to your ride request."
+          badge={t("featured_badge")}
+          title={t("featured_title")}
+          description={t("featured_desc")}
         />
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-2">
-          {featuredDrivers.map((driver, index) => (
+        <div className="mt-6 grid gap-4 lg:grid-cols-2">
+          {drivers.map((driver, index) => (
             <FadeIn key={driver.name} delay={0.06 * index}>
               <Card className="group overflow-hidden border-white/20 bg-slate-950/55 p-0 text-slate-100 transition duration-300 hover:-translate-y-0.5 hover:border-white/35">
                 <div className="grid gap-0 sm:grid-cols-[1.1fr_0.9fr]">
@@ -61,6 +70,14 @@ export function FeaturedDriversSection() {
                         <p className="text-slate-300">Response time</p>
                         <p className="mt-0.5 font-medium">{driver.responseTime}</p>
                       </div>
+                      <div className="rounded-lg bg-white/8 p-2">
+                        <p className="text-slate-300">Response rate</p>
+                        <p className="mt-0.5 font-medium">{driver.responseRate}</p>
+                      </div>
+                      <div className="rounded-lg bg-white/8 p-2">
+                        <p className="text-slate-300">Experience</p>
+                        <p className="mt-0.5 font-medium">{driver.yearsOfExperience} years</p>
+                      </div>
                     </div>
 
                     <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
@@ -73,42 +90,61 @@ export function FeaturedDriversSection() {
                       <span className="inline-flex items-center gap-1 rounded-full bg-slate-700/60 px-2.5 py-1">
                         <MapPin size={12} /> {driver.city}
                       </span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-700/60 px-2.5 py-1">
-                        <Languages size={12} /> {driver.languages.join(", ")}
+                      {driver.languages.length > 0 ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-slate-700/60 px-2.5 py-1">
+                          <Languages size={12} /> {driver.languages.join(", ")}
+                        </span>
+                      ) : null}
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-700/40 px-2.5 py-1 text-emerald-100">
+                        {t("featured_response_chip")} {driver.responseTime}
                       </span>
                     </div>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <Link href="/booking">
-                        <Button size="sm">Request Quote</Button>
-                      </Link>
-                      <Link
-                        href={`https://wa.me/${driver.whatsapp}?text=Hi%20${encodeURIComponent(driver.name)}%2C%20I%20want%20a%20SafeSobati%20ride%20quote.`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <Link href={`/drivers/${driver.slug}`}>
                         <Button size="sm" variant="secondary" className="bg-white/10 text-white ring-white/30 hover:bg-white/20">
-                          <MessageCircle size={14} />
-                          WhatsApp Driver
+                          {t("featured_compare")}
                         </Button>
+                      </Link>
+                      <Link href="/booking">
+                        <Button size="sm">{t("featured_request_availability")}</Button>
                       </Link>
                     </div>
                   </div>
 
                   <div className="relative min-h-52 sm:min-h-full">
                     <Image
-                      src={driver.vehicleImage}
+                      src={driver.vehicleImages[0]}
                       alt={`${driver.vehicleModel} vehicle photo`}
                       fill
                       sizes="(max-width: 640px) 100vw, 40vw"
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 to-transparent" />
+                    <div className="absolute bottom-2 left-2 right-2 flex gap-2">
+                      {driver.vehicleImages.slice(1, 3).map((image, imgIndex) => (
+                        <div key={`${driver.name}-thumb-${imgIndex}`} className="relative h-14 flex-1 overflow-hidden rounded-lg ring-1 ring-white/30">
+                          <Image
+                            src={image}
+                            alt={`${driver.vehicleModel} view ${imgIndex + 2}`}
+                            fill
+                            sizes="120px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </Card>
             </FadeIn>
           ))}
+
+          {drivers.length === 0 ? (
+            <Card className="border border-dashed border-slate-300/40 bg-slate-900/35 p-6 text-center text-slate-200 lg:col-span-2">
+              {t("featured_empty")}
+            </Card>
+          ) : null}
         </div>
       </div>
     </section>

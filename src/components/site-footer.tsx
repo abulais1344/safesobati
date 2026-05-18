@@ -57,7 +57,16 @@ export function SiteFooter() {
               <Link href="/privacy">Privacy</Link>
             </li>
             <li>
+              <Link href="/driver-agreement">Driver Agreement</Link>
+            </li>
+            <li>
+              <Link href="/safety">Safety</Link>
+            </li>
+            <li>
               <Link href="/faqs">FAQs</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact Support</Link>
             </li>
           </ul>
         </div>

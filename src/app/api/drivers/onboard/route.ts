@@ -5,22 +5,48 @@ type DriverOnboardPayload = {
   fullName: string;
   phone: string;
   city: string;
-  vehicleType: "auto" | "hatchback" | "sedan" | "suv" | "taxi";
+  vehicleType: "hatchback" | "sedan" | "suv" | "taxi";
   vehicleNumber: string;
   yearsOfExperience: number;
   aadhaarUrl?: string;
   licenseUrl?: string;
   rcUrl?: string;
-  brand: string;
-  model: string;
+  insuranceUrl?: string;
+  insuranceExpiry?: string;
+  pucUrl?: string;
+  pucExpiry?: string;
+  vehicleBrand: string;
+  vehicleModel: string;
+  languages?: string[];
   seatCount: number;
   ac: boolean;
   photos?: string[];
 };
 
+function normalizeDateForDb(value?: string): string | null {
+  if (!value) return null;
+  const input = value.trim();
+  if (!input) return null;
+
+  const isoMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
+  if (isoMatch) {
+    return input;
+  }
+
+  const dmyMatch = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(input);
+  if (dmyMatch) {
+    const [, dd, mm, yyyy] = dmyMatch;
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  return null;
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as DriverOnboardPayload;
+    const insuranceExpiry = normalizeDateForDb(body.insuranceExpiry);
+    const pucExpiry = normalizeDateForDb(body.pucExpiry);
 
     const { data: existingUser } = await supabaseAdmin
       .from("users")
@@ -59,6 +85,11 @@ export async function POST(request: Request) {
           aadhaar_url: body.aadhaarUrl ?? null,
           license_url: body.licenseUrl ?? null,
           rc_url: body.rcUrl ?? null,
+          insurance_url: body.insuranceUrl ?? null,
+          insurance_expiry: insuranceExpiry,
+          puc_url: body.pucUrl ?? null,
+          puc_expiry: pucExpiry,
+          languages: body.languages ?? [],
           status: "pending",
           available: false,
         },
@@ -75,8 +106,8 @@ export async function POST(request: Request) {
       {
         driver_id: driver.id,
         vehicle_type: body.vehicleType,
-        brand: body.brand,
-        model: body.model,
+        brand: body.vehicleBrand,
+        model: body.vehicleModel,
         seat_count: body.seatCount,
         ac: body.ac,
         registration_number: body.vehicleNumber,

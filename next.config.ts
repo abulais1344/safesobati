@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  serverExternalPackages: ["pdf-parse", "pdfjs-dist"],
   async headers() {
     return [
       {

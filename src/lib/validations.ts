@@ -12,7 +12,7 @@ export const driverOnboardingSchema = z.object({
   fullName: z.string().min(3, "Full name is required"),
   phone: z.string().min(10, "Phone must be at least 10 digits"),
   city: z.string().min(2, "City is required"),
-  vehicleType: z.enum(["auto", "sedan", "suv", "hatchback", "taxi", "school_bus"]),
+  vehicleType: z.enum(["sedan", "suv", "hatchback", "taxi"]),
   vehicleBrand: z.string().min(1, "Vehicle brand is required"),
   vehicleModel: z.string().min(1, "Vehicle model is required"),
   registrationYear: z.number().min(1990).max(new Date().getFullYear() + 1, "Invalid year"),
@@ -23,6 +23,9 @@ export const driverOnboardingSchema = z.object({
   aadhaarUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
   licenseUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
   rcUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
+  insuranceUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
+  pucUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
+  languages: z.string().optional(),
   photoUrls: z.string().optional(),
   consent: z.boolean().refine((value) => value, "Consent is required"),
 });

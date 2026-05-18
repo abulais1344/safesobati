@@ -54,7 +54,7 @@ export function MarketplaceSnapshot({
       { label: "Drivers online", value: metrics?.driversAvailable ?? 0 },
       { label: "Ride requests", value: metrics?.rideRequests ?? 0 },
       { label: "Active quotes", value: metrics?.activeQuotes ?? 0 },
-      { label: "Accepted rides", value: metrics?.acceptedRides ?? 0 },
+      { label: "Confirmed rides", value: metrics?.confirmedRides ?? 0 },
       { label: "Active cities", value: metrics?.citiesActive ?? 0 },
     ],
     [metrics]
