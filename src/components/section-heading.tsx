@@ -10,9 +10,9 @@ export function SectionHeading({ badge, title, description }: SectionHeadingProp
   return (
     <div className="mx-auto max-w-3xl text-center">
       {badge ? <Badge className="mx-auto w-fit">{badge}</Badge> : null}
-      <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
+      <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl dark:text-white">{title}</h2>
       {description ? (
-        <p className="mt-3 text-pretty text-sm text-slate-600 sm:text-base dark:text-slate-300">{description}</p>
+        <p className="mt-3 text-pretty text-sm text-slate-700 sm:text-base dark:text-slate-300">{description}</p>
       ) : null}
     </div>
   );

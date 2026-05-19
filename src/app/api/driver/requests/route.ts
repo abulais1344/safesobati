@@ -37,7 +37,7 @@ export async function GET(request: Request) {
     const { data, error } = await supabaseAdmin
       .from("ride_requests")
       .select("id, pickup, drop, trip_type, date, status, city, created_at")
-      .in("status", ["pending", "quoted"])
+      .in("status", ["pending", "responded", "shortlisted"])
       .eq("city", user.city)
       .order("created_at", { ascending: false })
       .limit(40);

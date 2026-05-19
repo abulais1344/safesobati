@@ -1,31 +1,41 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, Clock3, Route } from "lucide-react";
 import { FadeIn } from "@/components/motion/fade-in";
+import { useLanguage } from "@/components/providers/language-provider";
 import { SectionHeading } from "@/components/section-heading";
 import { Card } from "@/components/ui/card";
-import { popularRoutes } from "@/lib/constants";
+import type { RouteCard } from "@/lib/constants";
 
-export function PopularRoutesSection() {
+type PopularRoutesSectionProps = {
+  routes: RouteCard[];
+};
+
+export function PopularRoutesSection({ routes }: PopularRoutesSectionProps) {
+  const { t } = useLanguage();
+
   return (
-    <section className="py-16 sm:py-20">
+    <section className="py-10 sm:py-14">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Popular Destinations"
-          title="Visual route marketplace with predictable pricing"
-          description="Browse high-demand corridors with estimated travel times and verified quote starting prices."
+          badge={t("popular_badge")}
+          title={t("popular_title")}
+          description={t("popular_desc")}
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {popularRoutes.map((route, index) => (
+          {routes.map((route, index) => (
             <FadeIn key={`${route.from}-${route.to}`} delay={0.04 * index}>
               <Card className="group overflow-hidden p-0 transition duration-300 hover:-translate-y-1 hover:border-white/60 hover:shadow-[0_28px_55px_-30px_rgba(15,118,110,0.55)]">
                 <div className="relative">
                   <Image
                     src={route.image}
                     alt={`${route.from} to ${route.to} route preview`}
-                    width={1200}
-                    height={800}
+                    width={960}
+                    height={420}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="h-40 w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-slate-900/10 to-transparent" />
@@ -42,16 +52,16 @@ export function PopularRoutesSection() {
                       <Clock3 size={12} /> {route.travelTime}
                     </span>
                     <span className="inline-flex items-center gap-1 rounded-full bg-slate-500/10 px-2.5 py-1">
-                      <Route size={12} /> High demand corridor
+                      <Route size={12} /> {t("popular_high_demand")}
                     </span>
                   </div>
-                  <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">Starting quote {route.baseFare}</p>
+                  <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{t("popular_estimated_fare")} {route.baseFare}</p>
                 </div>
                 <Link
                   href="/booking"
                   className="mx-4 mb-4 inline-flex items-center gap-1 text-sm font-semibold text-brand transition group-hover:translate-x-0.5"
                 >
-                  Book this route
+                  {t("popular_send_booking")}
                   <ArrowUpRight size={14} />
                 </Link>
               </Card>

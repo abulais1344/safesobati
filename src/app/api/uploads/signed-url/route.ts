@@ -3,14 +3,29 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 
 type SignedUrlPayload = {
   fileName: string;
-  fileType: "aadhaar" | "license" | "rc" | "vehicle";
+  fileType: "aadhaar" | "license" | "rc" | "vehicle" | "insurance" | "puc";
 };
 
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as SignedUrlPayload;
     const bucketName = "driver-documents";
-    const path = `${body.fileType}/${crypto.randomUUID()}-${body.fileName}`;
+    const safeFileName = body.fileName.replace(/[^a-zA-Z0-9._-]/g, "-");
+    const path = `${body.fileType}/${crypto.randomUUID()}-${safeFileName}`;
+
+    // Ensure bucket exists so onboarding works in fresh environments.
+    const { data: bucket, error: bucketError } = await supabaseAdmin.storage.getBucket(bucketName);
+
+    if (bucketError || !bucket) {
+      const { error: createBucketError } = await supabaseAdmin.storage.createBucket(bucketName, {
+        public: true,
+        fileSizeLimit: 10 * 1024 * 1024,
+      });
+
+      if (createBucketError && !createBucketError.message.toLowerCase().includes("already exists")) {
+        throw new Error(createBucketError.message);
+      }
+    }
 
     const { data, error } = await supabaseAdmin.storage.from(bucketName).createSignedUploadUrl(path);
 

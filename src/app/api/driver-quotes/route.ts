@@ -34,9 +34,9 @@ export async function POST(request: Request) {
 
     await supabaseAdmin
       .from("ride_requests")
-      .update({ status: "quoted" })
+      .update({ status: "responded" })
       .eq("id", body.rideRequestId)
-      .in("status", ["pending", "quoted"]);
+      .in("status", ["pending", "responded", "shortlisted"]);
 
     const { data: rideRequest } = await supabaseAdmin
       .from("ride_requests")

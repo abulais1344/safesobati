@@ -7,7 +7,6 @@ import {
   Filter,
   Languages,
   MapPin,
-  MessageCircle,
   ShieldCheck,
   Sofa,
   Snowflake,
@@ -18,8 +17,8 @@ import { RideSearchForm } from "@/components/forms/ride-search-form";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { getApprovedMarketplaceDrivers } from "@/lib/marketplace-drivers";
 import { buildMetadata } from "@/lib/seo";
-import { featuredDrivers } from "@/lib/constants";
 
 export const metadata: Metadata = buildMetadata(
   "Search Rides",
@@ -27,13 +26,8 @@ export const metadata: Metadata = buildMetadata(
   "/search"
 );
 
-const quoteHints = ["INR 170", "INR 220", "INR 260", "INR 310"];
-
-export default function SearchPage() {
-  const results = featuredDrivers.map((driver, index) => ({
-    ...driver,
-    quote: quoteHints[index % quoteHints.length],
-  }));
+export default async function SearchPage() {
+  const results = await getApprovedMarketplaceDrivers();
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -51,7 +45,7 @@ export default function SearchPage() {
       </div>
 
       <div className="mt-4">
-        <RideSearchForm compact />
+        <RideSearchForm compact showAdvancedByDefault />
       </div>
 
       <div className="mt-5 flex items-center justify-between">
@@ -125,40 +119,45 @@ export default function SearchPage() {
                       <Clock3 size={12} /> {item.responseTime}
                     </p>
                   </div>
+                  <div className="rounded-lg bg-white/6 p-2">
+                    <p className="text-slate-300">Experience</p>
+                    <p className="mt-0.5 font-medium">{item.yearsOfExperience} years</p>
+                  </div>
+                  <div className="rounded-lg bg-white/6 p-2">
+                    <p className="text-slate-300">Response rate</p>
+                    <p className="mt-0.5 font-medium">{item.responseRate}</p>
+                  </div>
                 </div>
 
                 <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-slate-200">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-sky-500/15 px-2.5 py-1 text-sky-200">
-                    <Languages size={12} /> {item.languages.join(", ")}
-                  </span>
+                  {item.languages.length > 0 ? (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-sky-500/15 px-2.5 py-1 text-sky-200">
+                      <Languages size={12} /> {item.languages.join(", ")}
+                    </span>
+                  ) : null}
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2.5 py-1 text-emerald-200">
                     <ShieldCheck size={12} /> Only verified drivers
                   </span>
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <Link href="/booking">
-                    <Button size="sm">Request Quote</Button>
-                  </Link>
-                  <Link
-                    href={`https://wa.me/${item.whatsapp}?text=Hi%20${encodeURIComponent(item.name)}%2C%20I%20need%20a%20ride%20quote%20from%20SafeSobati.`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <Link href={`/drivers/${item.slug}`}>
                     <Button size="sm" variant="secondary" className="bg-white/10 text-white ring-white/30 hover:bg-white/20">
-                      <MessageCircle size={14} />
-                      WhatsApp Driver
+                      Compare Drivers
                     </Button>
                   </Link>
-                  <p className="ml-auto text-right text-sm text-slate-300 sm:text-base">
-                    Starting <span className="font-semibold text-white">{item.quote}</span>
-                  </p>
+                  <Link href="/booking">
+                    <Button size="sm">Request Availability</Button>
+                  </Link>
+                  <Link href="/booking">
+                    <Button size="sm" variant="outline">Send Booking Request</Button>
+                  </Link>
                 </div>
               </div>
 
               <div className="relative min-h-40">
                 <Image
-                  src={item.vehicleImage}
+                  src={item.vehicleImages[0]}
                   alt={`${item.vehicleModel} thumbnail`}
                   fill
                   sizes="(max-width: 640px) 100vw, 28vw"
@@ -166,10 +165,29 @@ export default function SearchPage() {
                   priority={index < 2}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2 right-2 grid grid-cols-2 gap-2">
+                  {item.vehicleImages.slice(1, 3).map((image, imageIndex) => (
+                    <div key={`${item.slug}-search-thumb-${imageIndex}`} className="relative h-12 overflow-hidden rounded-md ring-1 ring-white/30">
+                      <Image
+                        src={image}
+                        alt={`${item.vehicleModel} view ${imageIndex + 2}`}
+                        fill
+                        sizes="120px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </Card>
         ))}
+
+        {results.length === 0 ? (
+          <Card className="border border-dashed border-slate-300/40 bg-slate-900/35 p-6 text-center text-slate-200">
+            No approved drivers are live yet. Ask drivers to onboard, then approve them from admin.
+          </Card>
+        ) : null}
       </div>
 
       <MarketplaceSnapshot title="Live demand and supply" compact />

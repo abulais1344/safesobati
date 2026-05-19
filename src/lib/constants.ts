@@ -27,22 +27,6 @@ export type RouteCard = {
   travelTime: string;
 };
 
-export type FeaturedDriver = {
-  name: string;
-  city: string;
-  rating: number;
-  ridesCompleted: number;
-  languages: string[];
-  responseTime: string;
-  profileImage: string;
-  vehicleModel: string;
-  vehicleImage: string;
-  eta: string;
-  seats: number;
-  ac: boolean;
-  whatsapp: string;
-};
-
 export type RecentBooking = {
   rider: string;
   route: string;
@@ -60,10 +44,10 @@ export const navItems = [
 ];
 
 export const heroStats = [
-  { label: "Verified Drivers", value: "2,500+" },
-  { label: "Cities In Pipeline", value: "40+" },
-  { label: "Avg Pickup Time", value: "7 min" },
-  { label: "Rated Safety", value: "4.9/5" },
+  { label: "Verified Drivers", value: "148" },
+  { label: "Active Nearby", value: "63" },
+  { label: "Avg Response", value: "1.6 min" },
+  { label: "Rated Safety", value: "4.8/5" },
 ];
 
 export const trustFeatures: FeatureCard[] = [
@@ -118,13 +102,13 @@ export const productHighlights: FeatureCard[] = [
 
 export const popularRoutes: RouteCard[] = [
   {
-    from: "Ardhapur",
-    to: "Nanded City",
-    distance: "40 km",
-    travelTime: "55 min",
-    baseFare: "INR 1,200",
+    from: "Nanded",
+    to: "Hyderabad Airport",
+    distance: "280 km",
+    travelTime: "5 hr 20 min",
+    baseFare: "INR 8,400",
     image:
-      "https://images.unsplash.com/photo-1526726538690-5cbf956ae2fd?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
@@ -133,43 +117,52 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "22 min",
     baseFare: "INR 220",
     image:
-      "https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
-    to: "DGGMC Hospital",
-    distance: "5 km",
-    travelTime: "14 min",
-    baseFare: "INR 180",
+    to: "Pune",
+    distance: "520 km",
+    travelTime: "9 hr 10 min",
+    baseFare: "INR 14,500",
     image:
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1533473359331-35acda7ce3c1?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
-    to: "Parbhani",
-    distance: "65 km",
-    travelTime: "1 hr 22 min",
-    baseFare: "INR 2,250",
+    to: "Aurangabad",
+    distance: "265 km",
+    travelTime: "4 hr 50 min",
+    baseFare: "INR 7,900",
     image:
-      "https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    from: "Ardhapur",
+    to: "Nanded",
+    distance: "22 km",
+    travelTime: "38 min",
+    baseFare: "INR 780",
+    image:
+      "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
-    to: "Latur",
-    distance: "145 km",
-    travelTime: "2 hr 45 min",
-    baseFare: "INR 4,900",
+    to: "Pusad",
+    distance: "170 km",
+    travelTime: "3 hr 20 min",
+    baseFare: "INR 4,950",
     image:
-      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1488070537510-e21cc028cb29?auto=format&fit=crop&w=1200&q=80",
   },
   {
     from: "Nanded",
-    to: "Hyderabad Airport",
-    distance: "280 km",
-    travelTime: "5 hr 20 min",
-    baseFare: "INR 8,400",
+    to: "Bangalore",
+    distance: "690 km",
+    travelTime: "12 hr 20 min",
+    baseFare: "INR 18,900",
     image:
-      "https://images.unsplash.com/photo-1556122071-e404cb6f31dc?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -200,77 +193,6 @@ export const testimonials = [
     quote:
       "The WhatsApp connect plus clear fares removed all stress. It is now my default ride app.",
     rating: 5,
-  },
-];
-
-export const featuredDrivers: FeaturedDriver[] = [
-  {
-    name: "Imran Shaikh",
-    city: "Nanded",
-    rating: 4.9,
-    ridesCompleted: 1824,
-    languages: ["Hindi", "Marathi", "Urdu"],
-    responseTime: "1.2 min",
-    profileImage:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=480&q=80",
-    vehicleModel: "Maruti Dzire 2022",
-    vehicleImage:
-      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
-    eta: "6 min",
-    seats: 4,
-    ac: true,
-    whatsapp: "919876543210",
-  },
-  {
-    name: "Sunita Patil",
-    city: "Nanded",
-    rating: 4.8,
-    ridesCompleted: 1362,
-    languages: ["Hindi", "Marathi", "English"],
-    responseTime: "1.7 min",
-    profileImage:
-      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=480&q=80",
-    vehicleModel: "Hyundai Aura 2023",
-    vehicleImage:
-      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
-    eta: "8 min",
-    seats: 4,
-    ac: true,
-    whatsapp: "919876543211",
-  },
-  {
-    name: "Ravi Jadhav",
-    city: "Parbhani",
-    rating: 4.7,
-    ridesCompleted: 955,
-    languages: ["Hindi", "Marathi"],
-    responseTime: "2.1 min",
-    profileImage:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=480&q=80",
-    vehicleModel: "Tata Tigor EV",
-    vehicleImage:
-      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=80",
-    eta: "9 min",
-    seats: 4,
-    ac: true,
-    whatsapp: "919876543212",
-  },
-  {
-    name: "Farha Naaz",
-    city: "Nanded",
-    rating: 4.9,
-    ridesCompleted: 1118,
-    languages: ["Hindi", "Urdu", "Marathi"],
-    responseTime: "1.4 min",
-    profileImage:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=480&q=80",
-    vehicleModel: "Toyota Innova",
-    vehicleImage:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
-    eta: "11 min",
-    seats: 6,
-    ac: true,
-    whatsapp: "919876543213",
   },
 ];
 

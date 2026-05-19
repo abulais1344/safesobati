@@ -27,7 +27,7 @@ export async function POST(_: Request, { params }: { params: Promise<{ id: strin
     const { data: rideRequest, error: requestUpdateError } = await supabaseAdmin
       .from("ride_requests")
       .update({
-        status: "accepted",
+        status: "confirmed",
         selected_quote_id: selectedQuote.id,
         selected_driver_id: selectedQuote.driver_id,
       })
@@ -83,7 +83,7 @@ export async function POST(_: Request, { params }: { params: Promise<{ id: strin
       }
     }
 
-    return NextResponse.json({ requestId: rideRequest.id, status: "accepted" });
+    return NextResponse.json({ requestId: rideRequest.id, status: "confirmed" });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Failed to accept quote" },

@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+const devPort = process.env.PORT;
+
 const nextConfig: NextConfig = {
+  // Avoid chunk/cache collisions when running multiple dev servers on different ports.
+  distDir: isDev && devPort ? `.next-${devPort}` : ".next",
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -13,6 +18,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  serverExternalPackages: ["pdf-parse", "pdfjs-dist"],
   async headers() {
     return [
       {

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { driverOnboardingSchema } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,13 @@ export function DriverOnboardingForm() {
   const [aadhaarFile, setAadhaarFile] = useState<File | null>(null);
   const [licenseFile, setLicenseFile] = useState<File | null>(null);
   const [rcFile, setRcFile] = useState<File | null>(null);
+  const [insuranceFile, setInsuranceFile] = useState<File | null>(null);
+  const [pucFile, setPucFile] = useState<File | null>(null);
+  const [vehicleFiles, setVehicleFiles] = useState<File[]>([]);
+  const [insuranceExpiry, setInsuranceExpiry] = useState("");
+  const [pucExpiry, setPucExpiry] = useState("");
+  const [insuranceParsing, setInsuranceParsing] = useState(false);
+  const [pucParsing, setPucParsing] = useState(false);
   const { t } = useLanguage();
   const {
     register,
@@ -38,6 +46,9 @@ export function DriverOnboardingForm() {
       aadhaarUrl: "",
       licenseUrl: "",
       rcUrl: "",
+      insuranceUrl: "",
+      pucUrl: "",
+      languages: "",
       consent: false,
     },
   });
@@ -46,7 +57,10 @@ export function DriverOnboardingForm() {
   const models = getModelsByBrand(watchedBrand);
   const isCustomBrand = watchedBrand === "other";
 
-  const uploadDocument = async (file: File, fileType: "aadhaar" | "license" | "rc") => {
+  const uploadDocument = async (
+    file: File,
+    fileType: "aadhaar" | "license" | "rc" | "insurance" | "puc" | "vehicle"
+  ) => {
     const signedUrlResponse = await fetch("/api/uploads/signed-url", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,12 +94,45 @@ export function DriverOnboardingForm() {
     return `${supabaseUrl}/storage/v1/object/public/${signedUrlData.bucket}/${signedUrlData.path}`;
   };
 
+  const parseDocumentExpiry = async (file: File): Promise<string | null> => {
+    const fd = new FormData();
+    fd.append("file", file);
+    try {
+      const res = await fetch("/api/drivers/parse-document", { method: "POST", body: fd });
+      const data = await res.json() as { expiry?: string | null };
+      return data.expiry ?? null;
+    } catch {
+      return null;
+    }
+  };
+
+  const handleInsuranceChange = async (file: File | null) => {
+    setInsuranceFile(file);
+    if (!file || file.type !== "application/pdf") return;
+    setInsuranceParsing(true);
+    const expiry = await parseDocumentExpiry(file);
+    setInsuranceParsing(false);
+    if (expiry) setInsuranceExpiry(expiry);
+  };
+
+  const handlePucChange = async (file: File | null) => {
+    setPucFile(file);
+    if (!file || file.type !== "application/pdf") return;
+    setPucParsing(true);
+    const expiry = await parseDocumentExpiry(file);
+    setPucParsing(false);
+    if (expiry) setPucExpiry(expiry);
+  };
+
   const onSubmit = async (values: DriverOnboardingValues) => {
     setResultMessage("");
 
     let aadhaarUrl = values.aadhaarUrl;
     let licenseUrl = values.licenseUrl;
     let rcUrl = values.rcUrl;
+    let insuranceUrl = values.insuranceUrl;
+    let pucUrl = values.pucUrl;
+    let vehiclePhotoUrls: string[] = [];
 
     if (aadhaarFile) {
       aadhaarUrl = await uploadDocument(aadhaarFile, "aadhaar");
@@ -96,6 +143,21 @@ export function DriverOnboardingForm() {
     if (rcFile) {
       rcUrl = await uploadDocument(rcFile, "rc");
     }
+    if (insuranceFile) {
+      insuranceUrl = await uploadDocument(insuranceFile, "insurance");
+    }
+    if (pucFile) {
+      pucUrl = await uploadDocument(pucFile, "puc");
+    }
+    if (vehicleFiles.length > 0) {
+      vehiclePhotoUrls = await Promise.all(vehicleFiles.map((file) => uploadDocument(file, "vehicle")));
+    }
+
+    const parsedLanguages = (values.languages ?? "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .slice(0, 8);
 
     const response = await fetch("/api/drivers/onboard", {
       method: "POST",
@@ -110,11 +172,18 @@ export function DriverOnboardingForm() {
         aadhaarUrl,
         licenseUrl,
         rcUrl,
+        insuranceUrl,
+        insuranceExpiry: insuranceExpiry || undefined,
+        pucUrl,
+        pucExpiry: pucExpiry || undefined,
         vehicleBrand: values.vehicleBrand,
         vehicleModel: values.vehicleModel,
+        languages: parsedLanguages,
         registrationYear: values.registrationYear,
         seatCount: values.seatCount,
         ac: Boolean(values.ac),
+        photos: vehiclePhotoUrls,
+        consentGivenAt: new Date().toISOString(),
       }),
     });
 
@@ -167,6 +236,12 @@ export function DriverOnboardingForm() {
           <Input type="number" min={0} max={40} {...register("yearsOfExperience", { valueAsNumber: true })} />
         </div>
 
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">Languages known (comma separated)</label>
+          <Input placeholder="Hindi, Marathi, English" {...register("languages")} />
+          <p className="mt-1 text-xs text-slate-500">Example: Hindi, Marathi, English</p>
+        </div>
+
         {/* Vehicle Info */}
         <div>
           <label className="mb-1 block text-sm font-medium">{t("driver_vehicle_type")}</label>
@@ -177,9 +252,7 @@ export function DriverOnboardingForm() {
             <option value="sedan">Sedan</option>
             <option value="suv">SUV</option>
             <option value="hatchback">Hatchback</option>
-            <option value="auto">Auto</option>
             <option value="taxi">Taxi</option>
-            <option value="school_bus">School Bus</option>
           </select>
         </div>
 
@@ -291,6 +364,77 @@ export function DriverOnboardingForm() {
           />
         </div>
 
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">Vehicle photos (up to 5)</label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={(e) => {
+              const files = Array.from(e.target.files ?? []).slice(0, 5);
+              setVehicleFiles(files);
+            }}
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+          />
+          <p className="mt-1 text-xs text-slate-500">{vehicleFiles.length} / 5 selected</p>
+        </div>
+
+        {/* Insurance */}
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">{t("driver_insurance")}</label>
+          <input
+            type="file"
+            accept=".pdf,application/pdf"
+            onChange={(e) => handleInsuranceChange(e.target.files?.[0] || null)}
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">
+            {t("driver_insurance_expiry")}
+            {insuranceParsing && (
+              <span className="ml-2 inline-flex items-center gap-1 text-xs font-normal text-slate-500">
+                <Loader2 size={12} className="animate-spin" /> {t("driver_parsing")}
+              </span>
+            )}
+          </label>
+          <Input
+            placeholder={t("driver_insurance_expiry_placeholder")}
+            value={insuranceExpiry}
+            onChange={(e) => setInsuranceExpiry(e.target.value)}
+          />
+          <p className="mt-1 text-xs text-slate-500">Format: DD/MM/YYYY — auto-filled when you upload insurance PDF above.</p>
+        </div>
+
+        {/* PUC */}
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">{t("driver_puc")}</label>
+          <input
+            type="file"
+            accept=".pdf,application/pdf"
+            onChange={(e) => handlePucChange(e.target.files?.[0] || null)}
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">
+            {t("driver_puc_expiry")}
+            {pucParsing && (
+              <span className="ml-2 inline-flex items-center gap-1 text-xs font-normal text-slate-500">
+                <Loader2 size={12} className="animate-spin" /> {t("driver_parsing")}
+              </span>
+            )}
+          </label>
+          <Input
+            placeholder={t("driver_puc_expiry_placeholder")}
+            value={pucExpiry}
+            onChange={(e) => setPucExpiry(e.target.value)}
+          />
+          <p className="mt-1 text-xs text-slate-500">Format: DD/MM/YYYY — auto-filled when you upload PUC PDF above.</p>
+        </div>
+
         {/* Consent */}
         <div className="sm:col-span-2 flex items-center gap-3 rounded-xl border border-slate-200 bg-white/50 px-3 py-2 dark:border-slate-700 dark:bg-slate-900/50">
           <input
@@ -300,7 +444,15 @@ export function DriverOnboardingForm() {
             id="consent-check"
           />
           <label htmlFor="consent-check" className="text-sm font-medium cursor-pointer flex-1">
-            {t("driver_consent")}
+            {t("driver_consent")}{" "}
+            <a
+              href="/driver-agreement"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-dotted text-orange-600 dark:text-orange-400 hover:text-orange-700"
+            >
+              View Driver Agreement
+            </a>
           </label>
         </div>
         {errors.consent ? <p className="text-xs text-rose-600 sm:col-span-2">{errors.consent.message}</p> : null}
