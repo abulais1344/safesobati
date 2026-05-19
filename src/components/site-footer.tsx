@@ -1,11 +1,17 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-amber-200/60 bg-[#fff8ef]/85 py-10 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/75">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
-          <h3 className="text-base font-semibold text-slate-900 dark:text-white">SafeSobati</h3>
+          <div className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-white/10">
+              <BrandMark size={28} />
+            </div>
+            <h3 className="text-base font-semibold text-slate-900 dark:text-white">Safeसोबती</h3>
+          </div>
           <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
             Startup-grade trusted mobility platform for tier-2 and tier-3 India.
           </p>
@@ -72,7 +78,7 @@ export function SiteFooter() {
         </div>
       </div>
       <p className="mt-10 text-center text-xs text-slate-600 dark:text-slate-400">
-        © {new Date().getFullYear()} SafeSobati Technologies Pvt. Ltd. All rights reserved.
+        © {new Date().getFullYear()} Safeसोबती Technologies Pvt. Ltd. All rights reserved.
       </p>
     </footer>
   );
