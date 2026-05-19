@@ -27,7 +27,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-amber-200/60 bg-[#fff8ef]/85 backdrop-blur-xl dark:border-slate-700/80 dark:bg-slate-950/80">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-[0_10px_26px_-12px_rgba(15,118,110,0.55)] ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-white/10">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-[0_10px_26px_-12px_rgba(234,88,12,0.45)] ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-white/10">
             <BrandMark size={32} />
           </div>
           <div>
