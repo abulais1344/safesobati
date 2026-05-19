@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, ShieldCheck, Smartphone } from "lucide-react";
+import { Menu, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage } from "@/components/providers/language-provider";
+import { BrandMark } from "@/components/brand-mark";
 
 const navHrefs = [
   { href: "/search", key: "nav_search" },
@@ -26,11 +27,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-amber-200/60 bg-[#fff8ef]/85 backdrop-blur-xl dark:border-slate-700/80 dark:bg-slate-950/80">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-white shadow-[0_10px_26px_-12px_rgba(234,88,12,0.9)]">
-            <ShieldCheck size={20} />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-[0_10px_26px_-12px_rgba(15,118,110,0.55)] ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-white/10">
+            <BrandMark size={32} />
           </div>
           <div>
-            <p className="text-sm font-semibold leading-none text-slate-900 dark:text-white">SafeSobati</p>
+            <p className="text-sm font-semibold leading-none text-slate-900 dark:text-white">Safeसोबती</p>
             <p className="text-xs text-slate-600 dark:text-slate-300">{t("header_tagline")}</p>
           </div>
         </Link>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const siteName = "SafeSobati";
+const siteName = "Safeसोबती";
 const siteDescription =
   "Premium trusted mobility platform connecting riders with verified taxi, cab and auto drivers in tier-2 and tier-3 Indian cities.";
 const baseUrl = "https://safesobati.com";
@@ -33,7 +33,7 @@ export const defaultMetadata: Metadata = {
     "verified cab drivers",
     "tier 2 city mobility",
     "outstation cabs Nanded",
-    "SafeSobati",
+    "Safeसोबती",
   ],
 };
 
