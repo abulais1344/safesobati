@@ -24,7 +24,7 @@ export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-amber-200/60 bg-[#fff8ef]/85 backdrop-blur-xl dark:border-slate-700/80 dark:bg-slate-950/80">
+    <header className="sticky top-0 z-50 border-b border-amber-200/60 bg-[#fff8ef] dark:border-slate-700/80 dark:bg-slate-950">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-[0_10px_26px_-12px_rgba(234,88,12,0.45)] ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-white/10">
@@ -36,7 +36,7 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-amber-200/80 bg-white/85 p-1 md:flex dark:border-slate-700 dark:bg-slate-900/80">
+        <nav className="hidden items-center gap-1 rounded-full border border-amber-200/80 bg-white p-1 md:flex dark:border-slate-700 dark:bg-slate-900">
           {navHrefs.map((item) => (
             <Link
               key={item.href}
@@ -74,7 +74,7 @@ export function SiteHeader() {
           isMobileMenuOpen ? "block" : "hidden"
         }`}
       >
-        <nav className="space-y-1 rounded-2xl border border-amber-200/80 bg-white/90 p-2 dark:border-slate-700 dark:bg-slate-900/90">
+        <nav className="space-y-1 rounded-2xl border border-amber-200/80 bg-white p-2 dark:border-slate-700 dark:bg-slate-900">
           {navHrefs.map((item) => (
             <Link
               key={`mobile-${item.href}`}

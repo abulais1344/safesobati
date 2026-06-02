@@ -16,7 +16,7 @@ export async function LiveMarketplaceSection() {
         />
 
         <div className="mt-8 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-white/15 bg-slate-950/45 p-4 backdrop-blur-2xl">
+          <div className="rounded-3xl border border-white/15 bg-slate-950 p-4">
             <MarketplaceSnapshot title="SafeSobati Live Activity" compact />
           </div>
 
@@ -29,7 +29,7 @@ export async function LiveMarketplaceSection() {
                 {recentBookings.map((booking) => (
                   <div
                     key={`${booking.rider}-${booking.route}`}
-                    className="rounded-xl border border-white/10 bg-white/5 p-3"
+                    className="rounded-xl border border-slate-700 bg-slate-800 p-3"
                   >
                     <p className="text-sm font-medium">{booking.route}</p>
                     <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-300">

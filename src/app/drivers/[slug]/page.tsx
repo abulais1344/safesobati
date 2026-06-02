@@ -70,31 +70,31 @@ export default async function DriverProfilePage({
             </p>
 
             <div className="mt-5 grid gap-2 text-xs sm:grid-cols-3">
-              <div className="rounded-lg bg-white/8 p-2">
+              <div className="rounded-lg bg-slate-800 p-2">
                 <p className="text-slate-300">Rating</p>
                 <p className="mt-0.5 inline-flex items-center gap-1 font-medium">
                   <Star size={12} className="text-amber-300" /> {profile.rating}
                 </p>
               </div>
-              <div className="rounded-lg bg-white/8 p-2">
+              <div className="rounded-lg bg-slate-800 p-2">
                 <p className="text-slate-300">Rides completed</p>
                 <p className="mt-0.5 font-medium">{profile.ridesCompleted.toLocaleString()}</p>
               </div>
-              <div className="rounded-lg bg-white/8 p-2">
+              <div className="rounded-lg bg-slate-800 p-2">
                 <p className="text-slate-300">Experience</p>
                 <p className="mt-0.5 font-medium">{profile.yearsOfExperience} years</p>
               </div>
-              <div className="rounded-lg bg-white/8 p-2">
+              <div className="rounded-lg bg-slate-800 p-2">
                 <p className="text-slate-300">Response time</p>
                 <p className="mt-0.5 inline-flex items-center gap-1 font-medium">
                   <Clock3 size={12} /> {profile.responseTime}
                 </p>
               </div>
-              <div className="rounded-lg bg-white/8 p-2">
+              <div className="rounded-lg bg-slate-800 p-2">
                 <p className="text-slate-300">Response rate</p>
                 <p className="mt-0.5 font-medium">{profile.responseRate}</p>
               </div>
-              <div className="rounded-lg bg-white/8 p-2">
+              <div className="rounded-lg bg-slate-800 p-2">
                 <p className="text-slate-300">Joined</p>
                 <p className="mt-0.5 inline-flex items-center gap-1 font-medium">
                   <CalendarDays size={12} /> {profile.joinedDate}

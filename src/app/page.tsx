@@ -6,7 +6,6 @@ import { HowItWorksStrip } from "@/components/sections/how-it-works-strip";
 import { MobileStickyBookBar } from "@/components/sections/mobile-sticky-book-bar";
 import { PopularRoutesSection } from "@/components/sections/popular-routes-section";
 import { TrustSection } from "@/components/sections/trust-section";
-import { RideSearchForm } from "@/components/forms/ride-search-form";
 import { getApprovedMarketplaceDrivers } from "@/lib/marketplace-drivers";
 import { getPopularRoutesForDisplay } from "@/lib/popular-routes";
 import { buildMetadata } from "@/lib/seo";
@@ -24,18 +23,14 @@ export default async function Home() {
 
   return (
     <div className="pb-10">
-      <HeroSection />
-      
-      {/* Search Section */}
+      <HeroSection approvedDriverCount={approvedDrivers.length} />
+
       <section className="py-8 sm:py-12">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <HowItWorksStrip />
-          <div className="mt-4">
-          <RideSearchForm />
-          </div>
         </div>
       </section>
-      
+
       <FeaturedDriversSection drivers={approvedDrivers} />
       <PopularRoutesSection routes={popularRoutes} />
       <TrustSection />

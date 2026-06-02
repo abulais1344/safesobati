@@ -126,7 +126,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "9 hr 10 min",
     baseFare: "INR 14,500",
     image:
-      "https://images.unsplash.com/photo-1533473359331-35acda7ce3c1?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
   },
   {
     from: "Nanded",
@@ -135,7 +135,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "4 hr 50 min",
     baseFare: "INR 7,900",
     image:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1567343483408-8a68cef2f37b?w=800&q=80",
   },
   {
     from: "Ardhapur",
@@ -162,7 +162,7 @@ export const popularRoutes: RouteCard[] = [
     travelTime: "12 hr 20 min",
     baseFare: "INR 18,900",
     image:
-      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80",
   },
 ];
 

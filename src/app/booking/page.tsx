@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { BookingForm } from "@/components/forms/booking-form";
-import { Card } from "@/components/ui/card";
+import { BookingShell } from "./_booking-shell";
 import { buildMetadata } from "@/lib/seo";
-import { isRazorpayReady } from "@/lib/integrations";
 
 export const metadata: Metadata = buildMetadata(
   "Book Ride",
@@ -14,30 +12,26 @@ export default function BookingPage() {
   return (
     <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:grid-cols-5 lg:px-8">
       <div className="lg:col-span-3">
-        <h1 className="font-display text-3xl font-semibold">Create your booking request</h1>
-        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          Get quotes from verified nearby drivers, compare options and confirm confidently.
-        </p>
-        <div className="mt-6">
-          <BookingForm />
-        </div>
+        <BookingShell />
       </div>
 
-      <div className="space-y-4 lg:col-span-2">
-        <Card>
-          <h3 className="font-semibold">How quote booking works</h3>
-          <ol className="mt-3 list-decimal space-y-2 pl-4 text-sm text-slate-600 dark:text-slate-300">
-            <li>Submit route and schedule details.</li>
-            <li>Receive driver quotes with ETA and ratings.</li>
-            <li>Confirm your best option and ride safely.</li>
-          </ol>
-        </Card>
-        <Card>
-          <h3 className="font-semibold">Payments</h3>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-            Razorpay setup status: {isRazorpayReady ? "configured" : "pending environment setup"}.
+      <div className="hidden lg:col-span-2 lg:block">
+        <div className="space-y-3 rounded-2xl border border-[color:var(--surface-border)] bg-[color:var(--surface)] p-5">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">
+            Why SafeSobati {/* TODO: add to i18n */}
           </p>
-        </Card>
+          {[
+            "Every driver is KYC-verified before listing.",
+            "Real photos, ratings, and response times.",
+            "Cash payment directly to driver — no hidden fees.",
+            "WhatsApp confirmation for every booking.",
+          ].map((point) => (
+            <div key={point} className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
+              <span className="mt-0.5 text-brand">✓</span>
+              <span>{point}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

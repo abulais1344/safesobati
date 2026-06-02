@@ -8,7 +8,7 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="flex items-center rounded-lg border border-slate-200 bg-white/50 p-0.5 dark:border-slate-700 dark:bg-slate-900/50"
+      className="flex items-center rounded-lg border border-slate-200 bg-white p-0.5 dark:border-slate-700 dark:bg-slate-900"
       role="group"
       aria-label="Select language"
     >

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { FileCheck2, ShieldAlert, Users2 } from "lucide-react";
 import { MarketplaceSnapshot } from "@/components/marketplace-snapshot";
 import { Card } from "@/components/ui/card";
@@ -135,7 +136,16 @@ async function getDashboardData() {
   };
 }
 
-export default async function AdminDashboardPage() {
+export default async function AdminDashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ pwd?: string }>;
+}) {
+  const { pwd } = await searchParams;
+  if (pwd !== process.env.ADMIN_PASSWORD) {
+    redirect("/auth/sign-in");
+  }
+
   const { metrics, queue, safety, health } = await getDashboardData();
 
   return (
@@ -145,7 +155,7 @@ export default async function AdminDashboardPage() {
         Verification-first command center for trust, supply quality and booking health.
       </p>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {metrics.map((metric) => (
           <Card key={metric.title}>
             <p className="text-sm text-slate-600 dark:text-slate-300">{metric.title}</p>

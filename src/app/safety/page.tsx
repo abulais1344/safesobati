@@ -76,7 +76,7 @@ export default function SafetyPage() {
           {kycSteps.map((s) => (
             <div
               key={s.step}
-              className="relative rounded-2xl border border-slate-200 bg-white/70 p-5 dark:border-slate-700 dark:bg-slate-900/60"
+              className="relative rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900"
             >
               <span className="mb-3 inline-block text-3xl font-black leading-none text-orange-100 dark:text-orange-900">
                 {s.step}
@@ -200,7 +200,7 @@ export default function SafetyPage() {
           ].map((doc) => (
             <div
               key={doc}
-              className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/50 px-3 py-2.5 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300"
+              className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
             >
               <BadgeCheck size={13} className="shrink-0 text-emerald-500" />
               {doc}

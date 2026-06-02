@@ -77,7 +77,7 @@ export function AdminDriverKitManager() {
           type="file"
           accept="video/mp4,video/quicktime,video/webm"
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+          className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
         />
         <Button onClick={handleUpload} disabled={busy}>
           {busy ? "Uploading..." : "Upload onboarding video"}

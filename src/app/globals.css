@@ -9,7 +9,7 @@
   --brand-dark: #c2410c;
   --accent: #0f766e;
   --muted: #596579;
-  --surface: rgba(255, 252, 245, 0.78);
+  --surface: #fffcf5;
   --surface-border: rgba(226, 215, 195, 0.7);
 }
 
@@ -20,7 +20,7 @@
   --brand-dark: #f97316;
   --accent: #2dd4bf;
   --muted: #96a4bc;
-  --surface: rgba(6, 17, 35, 0.8);
+  --surface: #061123;
   --surface-border: rgba(114, 138, 170, 0.28);
 }
 

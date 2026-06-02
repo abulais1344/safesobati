@@ -1,9 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/brand-mark";
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  if (pathname === "/booking") return null;
+
   return (
-    <footer className="border-t border-amber-200/60 bg-[#fff8ef]/85 py-10 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/75">
+    <footer className="border-t border-amber-200/60 bg-[#fff8ef] py-10 dark:border-slate-800 dark:bg-slate-950">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="flex items-center gap-2">

@@ -121,7 +121,7 @@ export function RideSearchForm({ compact = false, showAdvancedByDefault = false 
         <div className={`${showAdvanced ? "grid" : "hidden"} gap-3 sm:grid-cols-2 lg:grid-cols-3`}>
             <div>
               <select
-                className="h-11 w-full rounded-xl border border-amber-200/80 bg-white/85 px-3 text-sm text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100"
+                className="h-11 w-full rounded-xl border border-amber-200/80 bg-white px-3 text-sm text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 {...register("tripType")}
               >
                 {tripTypeKeys.map((item) => (

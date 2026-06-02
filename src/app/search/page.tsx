@@ -31,7 +31,7 @@ export default async function SearchPage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="rounded-3xl border border-white/15 bg-slate-950/55 p-4 text-slate-100 backdrop-blur-2xl sm:p-6">
+      <div className="rounded-3xl border border-white/15 bg-slate-950 p-4 text-slate-100 sm:p-6">
         <h1 className="font-display text-3xl font-semibold">Search trusted rides</h1>
         <p className="mt-2 text-sm text-slate-300">
           Compare verified driver profiles, get instant quote responses, and book with full local trust.
@@ -50,7 +50,7 @@ export default async function SearchPage() {
 
       <div className="mt-5 flex items-center justify-between">
         <Badge variant="neutral">Showing verified results near your pickup</Badge>
-        <button className="inline-flex items-center gap-2 rounded-xl border border-slate-200/50 bg-white/10 px-3 py-2 text-sm text-slate-100 backdrop-blur-xl">
+        <button className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-100">
           <Filter size={15} />
           Filters
         </button>
@@ -97,33 +97,33 @@ export default async function SearchPage() {
                 </div>
 
                 <div className="mt-3 grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
-                  <div className="rounded-lg bg-white/6 p-2">
+                  <div className="rounded-lg bg-slate-800 p-2">
                     <p className="text-slate-300">Rating</p>
                     <p className="mt-0.5 inline-flex items-center gap-1 font-medium">
                       <Star size={12} className="text-amber-300" /> {item.rating}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-white/6 p-2">
+                  <div className="rounded-lg bg-slate-800 p-2">
                     <p className="text-slate-300">Rides</p>
                     <p className="mt-0.5 font-medium">{item.ridesCompleted.toLocaleString()}</p>
                   </div>
-                  <div className="rounded-lg bg-white/6 p-2">
+                  <div className="rounded-lg bg-slate-800 p-2">
                     <p className="text-slate-300">ETA</p>
                     <p className="mt-0.5 inline-flex items-center gap-1 font-medium">
                       <MapPin size={12} /> {item.eta}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-white/6 p-2">
+                  <div className="rounded-lg bg-slate-800 p-2">
                     <p className="text-slate-300">Response</p>
                     <p className="mt-0.5 inline-flex items-center gap-1 font-medium">
                       <Clock3 size={12} /> {item.responseTime}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-white/6 p-2">
+                  <div className="rounded-lg bg-slate-800 p-2">
                     <p className="text-slate-300">Experience</p>
                     <p className="mt-0.5 font-medium">{item.yearsOfExperience} years</p>
                   </div>
-                  <div className="rounded-lg bg-white/6 p-2">
+                  <div className="rounded-lg bg-slate-800 p-2">
                     <p className="text-slate-300">Response rate</p>
                     <p className="mt-0.5 font-medium">{item.responseRate}</p>
                   </div>
@@ -142,7 +142,7 @@ export default async function SearchPage() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Link href={`/drivers/${item.slug}`}>
-                    <Button size="sm" variant="secondary" className="bg-white/10 text-white ring-white/30 hover:bg-white/20">
+                    <Button size="sm" variant="secondary" className="bg-slate-700 text-white ring-slate-600 hover:bg-slate-600">
                       Compare Drivers
                     </Button>
                   </Link>

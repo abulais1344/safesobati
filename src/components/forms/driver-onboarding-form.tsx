@@ -233,7 +233,7 @@ export function DriverOnboardingForm() {
 
         <div>
           <label className="mb-1 block text-sm font-medium">{t("driver_years_exp")}</label>
-          <Input type="number" min={0} max={40} {...register("yearsOfExperience", { valueAsNumber: true })} />
+          <Input type="number" min={0} max={40} {...register("yearsOfExperience", { setValueAs: (v: string) => (v === "" ? undefined : Number(v)) })} />
         </div>
 
         <div className="sm:col-span-2">
@@ -246,7 +246,7 @@ export function DriverOnboardingForm() {
         <div>
           <label className="mb-1 block text-sm font-medium">{t("driver_vehicle_type")}</label>
           <select
-            className="h-11 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
             {...register("vehicleType")}
           >
             <option value="sedan">Sedan</option>
@@ -259,7 +259,7 @@ export function DriverOnboardingForm() {
         <div>
           <label className="mb-1 block text-sm font-medium">{t("driver_vehicle_brand")}</label>
           <select
-            className="h-11 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
             {...register("vehicleBrand")}
           >
             {vehicleBrands.map((b) => (
@@ -279,7 +279,7 @@ export function DriverOnboardingForm() {
           <div>
             <label className="mb-1 block text-sm font-medium">{t("driver_vehicle_model")}</label>
             <select
-              className="h-11 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+              className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
               {...register("vehicleModel")}
             >
               {models.map((m) => (
@@ -298,7 +298,7 @@ export function DriverOnboardingForm() {
             min={1990}
             max={new Date().getFullYear() + 1}
             placeholder={t("driver_reg_year_placeholder")}
-            {...register("registrationYear", { valueAsNumber: true })}
+            {...register("registrationYear", { setValueAs: (v: string) => (v === "" ? undefined : Number(v)) })}
           />
           {errors.registrationYear ? (
             <p className="mt-1 text-xs text-rose-600">{errors.registrationYear.message}</p>
@@ -322,11 +322,11 @@ export function DriverOnboardingForm() {
             type="number"
             min={1}
             max={8}
-            {...register("seatCount", { valueAsNumber: true })}
+            {...register("seatCount", { setValueAs: (v: string) => (v === "" ? undefined : Number(v)) })}
           />
         </div>
 
-        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white/50 px-3 py-2 dark:border-slate-700 dark:bg-slate-900/50">
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900">
           <input type="checkbox" className="h-4 w-4 rounded" {...register("ac")} id="ac-check" />
           <label htmlFor="ac-check" className="text-sm font-medium cursor-pointer flex-1">
             {t("driver_ac")}
@@ -340,7 +340,7 @@ export function DriverOnboardingForm() {
             type="file"
             accept="image/*,.pdf"
             onChange={(e) => setAadhaarFile(e.target.files?.[0] || null)}
-            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
           />
         </div>
 
@@ -350,7 +350,7 @@ export function DriverOnboardingForm() {
             type="file"
             accept="image/*,.pdf"
             onChange={(e) => setLicenseFile(e.target.files?.[0] || null)}
-            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
           />
         </div>
 
@@ -360,8 +360,9 @@ export function DriverOnboardingForm() {
             type="file"
             accept="image/*,.pdf"
             onChange={(e) => setRcFile(e.target.files?.[0] || null)}
-            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
           />
+          <p className="mt-1 text-xs text-slate-500">Optional — you can submit this later</p>
         </div>
 
         <div className="sm:col-span-2">
@@ -374,7 +375,7 @@ export function DriverOnboardingForm() {
               const files = Array.from(e.target.files ?? []).slice(0, 5);
               setVehicleFiles(files);
             }}
-            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
           />
           <p className="mt-1 text-xs text-slate-500">{vehicleFiles.length} / 5 selected</p>
         </div>
@@ -386,8 +387,9 @@ export function DriverOnboardingForm() {
             type="file"
             accept=".pdf,application/pdf"
             onChange={(e) => handleInsuranceChange(e.target.files?.[0] || null)}
-            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
           />
+          <p className="mt-1 text-xs text-slate-500">Optional — you can submit this later</p>
         </div>
 
         <div className="sm:col-span-2">
@@ -414,8 +416,9 @@ export function DriverOnboardingForm() {
             type="file"
             accept=".pdf,application/pdf"
             onChange={(e) => handlePucChange(e.target.files?.[0] || null)}
-            className="h-10 w-full rounded-xl border border-slate-200 bg-white/80 px-3 text-sm dark:border-slate-700 dark:bg-slate-900/80"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-900"
           />
+          <p className="mt-1 text-xs text-slate-500">Optional — you can submit this later</p>
         </div>
 
         <div className="sm:col-span-2">
@@ -436,7 +439,7 @@ export function DriverOnboardingForm() {
         </div>
 
         {/* Consent */}
-        <div className="sm:col-span-2 flex items-center gap-3 rounded-xl border border-slate-200 bg-white/50 px-3 py-2 dark:border-slate-700 dark:bg-slate-900/50">
+        <div className="sm:col-span-2 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900">
           <input
             type="checkbox"
             className="h-4 w-4 rounded"

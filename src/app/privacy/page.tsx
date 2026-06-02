@@ -255,7 +255,7 @@ export default function PrivacyPage() {
             <p className="font-semibold text-slate-900 dark:text-white">
               Grievance Officer &mdash; {COMPANY_NAME}
             </p>
-            <p className="mt-1">Email: privacy@safesobati.com</p>
+            <p className="mt-1">Email: hello@safesobati.com</p>
             <p>Response time: Within 30 days of receipt</p>
             <p>Jurisdiction: Nanded, Maharashtra, India</p>
           </div>

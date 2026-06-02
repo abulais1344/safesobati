@@ -14,7 +14,7 @@ export default function FaqPage() {
       <h1 className="font-display text-3xl font-semibold">Frequently asked questions</h1>
       <div className="mt-6 space-y-3">
         {faqs.map((faq) => (
-          <details key={faq.question} className="rounded-2xl border border-slate-200 bg-white/70 p-4 dark:border-slate-700 dark:bg-slate-900/70">
+          <details key={faq.question} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
             <summary className="cursor-pointer text-sm font-semibold">{faq.question}</summary>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{faq.answer}</p>
           </details>

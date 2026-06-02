@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -84,7 +85,6 @@ export function AdminDriverApproval() {
   const [drafts, setDrafts] = useState<Record<string, DriverDraft>>({});
   const [busyId, setBusyId] = useState<string | null>(null);
   const [activeDriverId, setActiveDriverId] = useState<string | null>(null);
-  const [message, setMessage] = useState("");
 
   const activeDriver = useMemo(
     () => pendingDrivers.find((driver) => driver.id === activeDriverId) ?? null,
@@ -98,7 +98,7 @@ export function AdminDriverApproval() {
     const data = await response.json();
 
     if (!response.ok) {
-      setMessage(data.error ?? "Unable to load pending drivers");
+      toast.error(data.error ?? "Unable to load pending drivers");
       return;
     }
 
@@ -141,7 +141,7 @@ export function AdminDriverApproval() {
     setBusyId(null);
 
     if (!response.ok) {
-      setMessage(data.error ?? "Unable to save driver details");
+      toast.error(data.error ?? "Unable to save driver details");
       return false;
     }
 
@@ -157,11 +157,15 @@ export function AdminDriverApproval() {
     setBusyId(null);
 
     if (!response.ok) {
-      setMessage(data.error ?? "Unable to send driver kit");
+      toast.error(data.error ?? "Unable to send driver kit");
       return;
     }
 
-    setMessage(data.delivered ? "Driver kit WhatsApp sent" : `Driver kit queued/stubbed: ${data.reason ?? "n/a"}`);
+    if (data.delivered) {
+      toast.success("Driver kit WhatsApp sent");
+    } else {
+      toast.error(`Driver kit queued/stubbed: ${data.reason ?? "n/a"}`);
+    }
   };
 
   const updateApproval = async (driverId: string, status: "approved" | "rejected" | "suspended") => {
@@ -169,7 +173,7 @@ export function AdminDriverApproval() {
     if (!draft) return;
 
     if ((status === "rejected" || status === "suspended") && !draft.rejectionReason.trim()) {
-      setMessage("Reason is mandatory for reject or suspend actions");
+      toast.error("Reason is mandatory for reject or suspend actions");
       return;
     }
 
@@ -192,11 +196,17 @@ export function AdminDriverApproval() {
     setBusyId(null);
 
     if (!response.ok) {
-      setMessage(data.error ?? "Unable to update approval status");
+      toast.error(data.error ?? "Unable to update approval status");
       return;
     }
 
-    setMessage(`Updated ${driverId} to ${data.status}`);
+    if (status === "approved") {
+      toast.success(`${draft.fullName} approved successfully`);
+    } else if (status === "rejected") {
+      toast.error(`${draft.fullName} rejected`);
+    } else {
+      toast.error(`${draft.fullName} suspended`);
+    }
     setActiveDriverId(null);
     await loadPendingDrivers();
   };
@@ -456,7 +466,6 @@ export function AdminDriverApproval() {
         </div>
       ) : null}
 
-      {message ? <p className="mt-3 text-sm text-emerald-700">{message}</p> : null}
     </Card>
   );
 }

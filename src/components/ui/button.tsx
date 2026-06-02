@@ -8,7 +8,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-brand text-white shadow-[0_14px_28px_-14px_rgba(234,88,12,0.85)] hover:bg-brand-dark",
-        secondary: "bg-slate-900/90 text-amber-50 ring-1 ring-slate-800 backdrop-blur-md hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:ring-slate-200 dark:hover:bg-white",
+        secondary: "bg-slate-900 text-amber-50 ring-1 ring-slate-800 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:ring-slate-200 dark:hover:bg-white",
         ghost: "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800",
         outline: "ring-1 ring-amber-300/70 text-amber-900 hover:bg-amber-50 dark:ring-amber-400/50 dark:text-amber-200 dark:hover:bg-amber-400/10",
         danger: "bg-rose-600 text-white hover:bg-rose-700",
