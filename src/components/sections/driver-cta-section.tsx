@@ -15,7 +15,7 @@ export function DriverCTASection() {
         <FadeIn>
           <div className="overflow-hidden rounded-3xl bg-slate-900 p-8 text-white sm:p-10">
             <div className="max-w-3xl">
-              <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs">
+              <p className="inline-flex items-center gap-2 rounded-full bg-slate-700 px-3 py-1 text-xs">
                 <ShieldCheck size={14} /> {t("driver_cta_badge")}
               </p>
               <h3 className="mt-4 text-3xl font-semibold sm:text-4xl">

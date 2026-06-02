@@ -7,17 +7,13 @@ import { FadeIn } from "@/components/motion/fade-in";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { heroStats } from "@/lib/constants";
 import { useLanguage } from "@/components/providers/language-provider";
 
-const statKeys = [
-  "stat_verified_drivers",
-  "stat_cities",
-  "stat_pickup_time",
-  "stat_safety_rating",
-] as const;
+type HeroSectionProps = {
+  approvedDriverCount: number;
+};
 
-export function HeroSection() {
+export function HeroSection({ approvedDriverCount }: HeroSectionProps) {
   const { t } = useLanguage();
 
   return (
@@ -53,59 +49,66 @@ export function HeroSection() {
               </Link>
             </div>
             <div className="mt-5 flex flex-wrap gap-3 text-xs text-slate-700 sm:text-sm dark:text-slate-200">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 ring-1 ring-amber-200/70 backdrop-blur-xl dark:bg-white/10 dark:ring-white/20">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 ring-1 ring-amber-200/70 dark:bg-slate-800 dark:ring-white/20">
                 <Shield size={14} /> {t("hero_chip_verified")}
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 ring-1 ring-amber-200/70 backdrop-blur-xl dark:bg-white/10 dark:ring-white/20">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 ring-1 ring-amber-200/70 dark:bg-slate-800 dark:ring-white/20">
                 <Zap size={14} /> {t("hero_chip_hire")}
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 ring-1 ring-amber-200/70 backdrop-blur-xl dark:bg-white/10 dark:ring-white/20">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 ring-1 ring-amber-200/70 dark:bg-slate-800 dark:ring-white/20">
                 <MapPinned size={14} /> {t("hero_chip_routes")}
               </span>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <div className="rounded-3xl border border-amber-200/60 bg-white/70 p-3 backdrop-blur-2xl dark:border-white/20 dark:bg-white/10">
+            <div className="rounded-3xl border border-amber-200/60 bg-white p-3 dark:border-white/20 dark:bg-slate-800">
               <div className="relative overflow-hidden rounded-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80"
-                  alt="Trusted taxi and ride services for local travel"
+                  src="/safesobati_hero.png"
+                  alt="SafeSobati — Trusted Rides For Bharat"
                   width={1200}
                   height={900}
-                  className="h-56 w-full object-cover sm:h-72"
+                  className="h-56 w-full object-contain sm:h-72"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/10 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-slate-950/70 p-3 text-white ring-1 ring-white/20 backdrop-blur-xl">
+                <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-slate-950 p-3 text-white ring-1 ring-white/20">
                   <p className="text-xs text-amber-300">{t("hero_live_tag")}</p>
-                  <p className="text-sm font-semibold">{t("hero_live_drivers")}</p>
+                  <p className="text-sm font-semibold">
+                    {approvedDriverCount} verified driver{approvedDriverCount === 1 ? "" : "s"} online around you {/* TODO: add to i18n */}
+                  </p>
                   <div className="mt-1 flex items-center gap-3 text-xs text-slate-200">
                     <span className="inline-flex items-center gap-1">
-                      <Clock3 size={12} /> {t("hero_live_response")}
+                      <Clock3 size={12} /> Avg response &lt; 5 min {/* TODO: add to i18n */}
                     </span>
                     <span className="inline-flex items-center gap-1">
-                      <CheckCircle2 size={12} /> {t("hero_live_rated")}
+                      <CheckCircle2 size={12} /> KYC verified fleet {/* TODO: add to i18n */}
                     </span>
                   </div>
                 </div>
               </div>
               <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-200">
-                <div className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-amber-200 dark:bg-white/10 dark:ring-white/20">{t("hero_tile_wedding")}</div>
-                <div className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-amber-200 dark:bg-white/10 dark:ring-white/20">{t("hero_tile_hospital")}</div>
-                <div className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-amber-200 dark:bg-white/10 dark:ring-white/20">{t("hero_tile_airport")}</div>
-                <div className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-amber-200 dark:bg-white/10 dark:ring-white/20">{t("hero_tile_rates")}</div>
+                <div className="rounded-xl bg-white px-3 py-2 ring-1 ring-amber-200 dark:bg-slate-800 dark:ring-white/20">{t("hero_tile_wedding")}</div>
+                <div className="rounded-xl bg-white px-3 py-2 ring-1 ring-amber-200 dark:bg-slate-800 dark:ring-white/20">{t("hero_tile_hospital")}</div>
+                <div className="rounded-xl bg-white px-3 py-2 ring-1 ring-amber-200 dark:bg-slate-800 dark:ring-white/20">{t("hero_tile_airport")}</div>
+                <div className="rounded-xl bg-white px-3 py-2 ring-1 ring-amber-200 dark:bg-slate-800 dark:ring-white/20">{t("hero_tile_rates")}</div>
               </div>
             </div>
           </FadeIn>
         </div>
 
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {heroStats.map((item, index) => (
+          {[
+            { value: String(approvedDriverCount || 0), label: t("stat_verified_drivers") },
+            { value: "Nanded", label: "Maharashtra" }, // TODO: add to i18n
+            { value: "< 5 min", label: t("stat_pickup_time") },
+            { value: "KYC", label: "Verified Fleet" }, // TODO: add to i18n
+          ].map((stat, index) => (
             <FadeIn key={index} delay={0.05 * index}>
-              <div className="rounded-2xl border border-amber-200/80 bg-white/80 p-4 text-slate-900 backdrop-blur-2xl dark:border-white/20 dark:bg-white/10 dark:text-white">
-                <p className="text-2xl font-semibold sm:text-3xl">{item.value}</p>
-                <p className="mt-1 text-xs text-slate-600 sm:text-sm dark:text-slate-200">{t(statKeys[index])}</p>
+              <div className="rounded-2xl border border-amber-200/80 bg-white p-4 text-slate-900 dark:border-white/20 dark:bg-slate-800 dark:text-white">
+                <p className="text-2xl font-semibold sm:text-3xl">{stat.value}</p>
+                <p className="mt-1 text-xs text-slate-600 sm:text-sm dark:text-slate-200">{stat.label}</p>
               </div>
             </FadeIn>
           ))}

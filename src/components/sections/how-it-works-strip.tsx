@@ -13,13 +13,13 @@ export function HowItWorksStrip() {
   const { t } = useLanguage();
 
   return (
-    <div className="rounded-2xl border border-amber-200/70 bg-white/75 p-4 backdrop-blur-xl dark:border-white/20 dark:bg-white/10">
+    <div className="rounded-2xl border border-amber-200/70 bg-white p-4 dark:border-white/20 dark:bg-slate-800">
       <p className="text-xs font-semibold tracking-wide text-slate-700 dark:text-slate-200">
         {t("how_title")}
       </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-3">
         {steps.map((step) => (
-          <div key={step.titleKey} className="rounded-xl bg-white/85 p-3 ring-1 ring-amber-200/70 dark:bg-white/10 dark:ring-white/20">
+          <div key={step.titleKey} className="rounded-xl bg-white p-3 ring-1 ring-amber-200/70 dark:bg-slate-700 dark:ring-white/20">
             <p className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-800 dark:text-slate-100">
               <step.icon size={14} /> {t(step.titleKey)}
             </p>

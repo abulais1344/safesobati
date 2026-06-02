@@ -273,8 +273,8 @@ export default function DriverAgreementPage() {
           <p>Driver support and compliance queries:</p>
           <div className="mt-2 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-900/60">
             <p className="font-semibold text-slate-900 dark:text-white">{COMPANY_NAME}</p>
-            <p className="mt-1">Email: drivers@safesobati.com</p>
-            <p>WhatsApp Support: Available via Platform</p>
+            <p className="mt-1">Email: hello@safesobati.com</p>
+            <p>WhatsApp: +91 84212 22893</p>
             <p>Jurisdiction: Nanded, Maharashtra, India</p>
           </div>
         </Section>

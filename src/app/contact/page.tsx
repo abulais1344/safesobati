@@ -21,7 +21,7 @@ export default function ContactPage() {
 
         <div className="mt-6 grid gap-3">
           <Card className="flex items-center gap-3">
-            <PhoneCall size={16} /> +91 99999 99999
+            <PhoneCall size={16} /> +91 84212 22893
           </Card>
           <Card className="flex items-center gap-3">
             <Mail size={16} /> hello@safesobati.com

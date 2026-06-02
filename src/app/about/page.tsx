@@ -20,19 +20,19 @@ export default function AboutPage() {
       <p className="mt-3 text-base text-slate-700 dark:text-slate-200">{cityLaunchNote}</p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl bg-white/70 p-5 dark:bg-slate-900/70">
+        <div className="rounded-2xl bg-white p-5 dark:bg-slate-900">
           <p className="text-xl font-semibold">Vision</p>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
             Become Bharat&apos;s most trusted local mobility brand.
           </p>
         </div>
-        <div className="rounded-2xl bg-white/70 p-5 dark:bg-slate-900/70">
+        <div className="rounded-2xl bg-white p-5 dark:bg-slate-900">
           <p className="text-xl font-semibold">Mission</p>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
             Connect riders and verified drivers through transparent and premium experiences.
           </p>
         </div>
-        <div className="rounded-2xl bg-white/70 p-5 dark:bg-slate-900/70">
+        <div className="rounded-2xl bg-white p-5 dark:bg-slate-900">
           <p className="text-xl font-semibold">Values</p>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
             Safety, trust, local empathy, and operational excellence.

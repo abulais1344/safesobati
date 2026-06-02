@@ -34,7 +34,7 @@ export function MobileStickyBookBar() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-amber-200/70 bg-[#fff8ef]/95 p-3 backdrop-blur md:hidden dark:border-slate-700 dark:bg-slate-950/95 ${
+      className={`fixed inset-x-0 bottom-0 z-50 border-t border-amber-200/70 bg-[#fff8ef] p-3 md:hidden dark:border-slate-700 dark:bg-slate-950 ${
         isVisible ? "translate-y-0" : "translate-y-full"
       } transition-transform duration-300`}
       aria-hidden={!isVisible}
