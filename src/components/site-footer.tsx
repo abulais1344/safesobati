@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/brand-mark";
+import { useLanguage } from "@/components/providers/language-provider";
 
 export function SiteFooter() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   if (pathname === "/booking") return null;
 
   return (
@@ -19,67 +21,39 @@ export function SiteFooter() {
             <h3 className="text-base font-semibold text-slate-900 dark:text-white">Safeसोबती</h3>
           </div>
           <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-            Startup-grade trusted mobility platform for tier-2 and tier-3 India.
+            {t("footer.tagline")}
           </p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Company</h4>
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{t("footer.company")}</h4>
           <ul className="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-300">
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/safety">Safety</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
+            <li><Link href="/about">{t("footer.about")}</Link></li>
+            <li><Link href="/safety">{t("footer.safety")}</Link></li>
+            <li><Link href="/contact">{t("footer.contact")}</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Platform</h4>
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{t("footer.platform")}</h4>
           <ul className="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-300">
-            <li>
-              <Link href="/live-activity">Live activity</Link>
-            </li>
-            <li>
-              <Link href="/search">Search rides</Link>
-            </li>
-            <li>
-              <Link href="/driver/register">Become a driver</Link>
-            </li>
-            <li>
-              <Link href="/driver/dashboard">Driver dashboard</Link>
-            </li>
-            <li>
-              <Link href="/admin/dashboard">Admin dashboard</Link>
-            </li>
+            <li><Link href="/live-activity">{t("footer.liveActivity")}</Link></li>
+            <li><Link href="/search">{t("footer.searchRides")}</Link></li>
+            <li><Link href="/driver/register">{t("driver.becomeDriver")}</Link></li>
+            <li><Link href="/driver/dashboard">Driver dashboard</Link></li>
+            <li><Link href="/admin/dashboard">Admin dashboard</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Legal</h4>
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{t("footer.legal")}</h4>
           <ul className="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-300">
-            <li>
-              <Link href="/terms">Terms</Link>
-            </li>
-            <li>
-              <Link href="/privacy">Privacy</Link>
-            </li>
-            <li>
-              <Link href="/driver-agreement">Driver Agreement</Link>
-            </li>
-            <li>
-              <Link href="/safety">Safety</Link>
-            </li>
-            <li>
-              <Link href="/faqs">FAQs</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact Support</Link>
-            </li>
+            <li><Link href="/terms">{t("footer.terms")}</Link></li>
+            <li><Link href="/privacy">{t("footer.privacy")}</Link></li>
+            <li><Link href="/driver-agreement">{t("footer.driverAgreement")}</Link></li>
+            <li><Link href="/safety">{t("footer.safety")}</Link></li>
+            <li><Link href="/faqs">FAQs</Link></li>
+            <li><Link href="/contact">{t("footer.contactSupport")}</Link></li>
           </ul>
         </div>
       </div>

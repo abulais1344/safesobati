@@ -4,9 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MessageCircle, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/providers/language-provider";
 
 export function StickyMobileCTA() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   if (pathname === "/booking") return null;
 
   return (
@@ -15,13 +17,13 @@ export function StickyMobileCTA() {
         <Link href="/search">
           <Button className="w-full" size="sm">
             <Search size={15} />
-            Find Ride
+            {t("mobile_book_now")}
           </Button>
         </Link>
         <a href="https://wa.me/918421222893" target="_blank" rel="noreferrer">
           <Button variant="secondary" className="w-full" size="sm">
             <MessageCircle size={15} />
-            WhatsApp
+            {t("mobile_whatsapp")}
           </Button>
         </a>
       </div>
