@@ -96,12 +96,6 @@ const LOCATION_CHIPS = [
   "Dr. Shankarrao Chavan Govt Hospital",
 ];
 
-const SORT_OPTIONS: { mode: SortMode; label: string }[] = [
-  { mode: "all", label: "All" }, // TODO: add to i18n
-  { mode: "nearest", label: "Nearest" }, // TODO: add to i18n
-  { mode: "best_rated", label: "Best rated" }, // TODO: add to i18n
-  { mode: "lowest_fare", label: "Lowest fare" }, // TODO: add to i18n
-];
 
 const INITIAL_FORM: FormState = {
   tripType: "",
@@ -137,6 +131,7 @@ function DriverAvatar({ initials, colorClass }: { initials: string; colorClass: 
 }
 
 function DriverNameRow({ driver }: { driver: MockDriver }) {
+  const { t } = useLanguage();
   return (
     <div className="flex items-center gap-3">
       <DriverAvatar initials={driver.initials} colorClass={driver.avatarColor} />
@@ -144,7 +139,7 @@ function DriverNameRow({ driver }: { driver: MockDriver }) {
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-sm font-semibold">{driver.name}</span>
           <Badge variant="success" className="px-2 py-0.5 text-[10px] leading-none">
-            KYC ✓
+            {t("driver.kycBadge")}
           </Badge>
         </div>
         <p className="mt-0.5 text-xs text-muted">{driver.vehicle}</p>
@@ -209,6 +204,13 @@ type BookingFormProps = {
 
 export function BookingForm({ onStepChange }: BookingFormProps) {
   const { t } = useLanguage();
+
+  const sortOptions: { mode: SortMode; label: string }[] = [
+    { mode: "all", label: t("booking.sortAll") },
+    { mode: "nearest", label: t("booking.sortNearest") },
+    { mode: "best_rated", label: t("booking.sortBestRated") },
+    { mode: "lowest_fare", label: t("booking.sortLowestFare") },
+  ];
 
   // ── Core state ──────────────────────────────────────────────────────────────
   const [step, setStep] = useState(1);
@@ -382,7 +384,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
           className="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
         >
           <ArrowLeft size={16} />
-          <span>Back</span> {/* TODO: add to i18n */}
+          <span>{t("booking.back")}</span>
         </button>
       )}
 
@@ -402,10 +404,10 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
             <div className="space-y-5">
               <div>
                 <h2 className="font-display text-xl font-semibold">
-                  Choose your trip type {/* TODO: add to i18n */}
+                  {t("booking.tripTypeTitle")}
                 </h2>
                 <p className="mt-1 text-sm text-muted">
-                  What kind of ride do you need? {/* TODO: add to i18n */}
+                  {t("booking.tripTypeSubtitle")}
                 </p>
               </div>
 
@@ -446,12 +448,12 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
 
               {!formState.tripType && (
                 <p className="text-xs text-center text-muted-foreground mt-2 mb-1">
-                  Tap a card above to continue
+                  {t("booking.tapHint")}
                 </p>
               )}
 
               <Button className="w-full" disabled={!formState.tripType} onClick={goNext}>
-                Next {/* TODO: add to i18n */}
+                {t("booking.next")}
               </Button>
             </div>
           )}
@@ -462,7 +464,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
           {step === 2 && (
             <div className="space-y-5">
               <h2 className="font-display text-xl font-semibold">
-                Your route &amp; schedule {/* TODO: add to i18n */}
+                {t("booking.routeTitle")}
               </h2>
 
               {/* Pickup */}
@@ -490,20 +492,20 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
               {/* Date toggle */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">
-                  Date {/* TODO: add to i18n */}
+                  {t("booking.dateLabel")}
                 </label>
                 <div className="flex gap-2">
                   <ToggleButton
                     active={formState.date === "today"}
                     onClick={() => updateForm({ date: "today" })}
                   >
-                    Today {/* TODO: add to i18n */}
+                    {t("booking.today")}
                   </ToggleButton>
                   <ToggleButton
                     active={formState.date === "scheduled"}
                     onClick={() => updateForm({ date: "scheduled" })}
                   >
-                    Schedule {/* TODO: add to i18n */}
+                    {t("booking.schedule")}
                   </ToggleButton>
                 </div>
                 {formState.date === "scheduled" && (
@@ -519,20 +521,20 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
               {/* Time toggle */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">
-                  Time {/* TODO: add to i18n */}
+                  {t("booking.timeLabel")}
                 </label>
                 <div className="flex gap-2">
                   <ToggleButton
                     active={formState.time === "now"}
                     onClick={() => updateForm({ time: "now" })}
                   >
-                    Now {/* TODO: add to i18n */}
+                    {t("booking.now")}
                   </ToggleButton>
                   <ToggleButton
                     active={formState.time === "later"}
                     onClick={() => updateForm({ time: "later" })}
                   >
-                    Later {/* TODO: add to i18n */}
+                    {t("booking.later")}
                   </ToggleButton>
                 </div>
                 {formState.time === "later" && (
@@ -577,7 +579,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                 disabled={!formState.pickup.trim() || !formState.drop.trim()}
                 onClick={goNext}
               >
-                Next {/* TODO: add to i18n */}
+                {t("booking.next")}
               </Button>
             </div>
           )}
@@ -589,10 +591,10 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
             <div className="space-y-5">
               <div>
                 <h2 className="font-display text-xl font-semibold">
-                  Verify your number {/* TODO: add to i18n */}
+                  {t("booking.verifyTitle")}
                 </h2>
                 <p className="mt-1 text-sm text-muted">
-                  We send a one-time code to confirm your ride {/* TODO: add to i18n */}
+                  {t("booking.verifySubtitle")}
                 </p>
               </div>
 
@@ -624,7 +626,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                   disabled={formState.phone.length !== 10}
                   onClick={handleSendOtp}
                 >
-                  Send OTP {/* TODO: add to i18n */}
+                  {t("booking.sendOtp")}
                 </Button>
               )}
 
@@ -632,7 +634,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
               {otpSent && (
                 <div className="space-y-4">
                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Enter the 4-digit code sent to your number {/* TODO: add to i18n */}
+                    {t("booking.otpInstruction")}
                   </p>
 
                   <div className="flex gap-3">
@@ -652,13 +654,13 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                   </div>
 
                   <Button className="w-full" disabled={!isOtpComplete} onClick={goNext}>
-                    Verify &amp; see drivers {/* TODO: add to i18n */}
+                    {t("booking.verifyBtn")}
                   </Button>
 
                   <div className="text-center text-sm">
                     {resendCountdown > 0 ? (
                       <span className="text-slate-500 dark:text-slate-400">
-                        Resend in {resendCountdown}s {/* TODO: add to i18n */}
+                        {t("booking.resendIn")} {resendCountdown}s
                       </span>
                     ) : (
                       <button
@@ -666,7 +668,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                         className="font-medium text-brand hover:text-brand-dark"
                         onClick={handleSendOtp}
                       >
-                        Resend OTP {/* TODO: add to i18n */}
+                        {t("booking.resendOtp")}
                       </button>
                     )}
                   </div>
@@ -681,12 +683,12 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
           {step === 4 && (
             <div className="space-y-4">
               <h2 className="font-display text-xl font-semibold">
-                Available drivers {/* TODO: add to i18n */}
+                {t("booking.quotesTitle")}
               </h2>
 
               {/* Sort pills */}
               <div className="flex flex-wrap gap-2">
-                {SORT_OPTIONS.map(({ mode, label }) => (
+                {sortOptions.map(({ mode, label }) => (
                   <button
                     key={mode}
                     type="button"
@@ -713,7 +715,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                     <div className="space-y-3">
                       {driver.isBestMatch && (
                         <div>
-                          <Badge>Best match</Badge> {/* TODO: add to i18n */}
+                          <Badge>{t("booking.bestMatch")}</Badge>
                         </div>
                       )}
 
@@ -727,7 +729,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                             {driver.rating.toFixed(1)}
                           </div>
                           <div className="mt-0.5 text-muted">
-                            Rating {/* TODO: add to i18n */}
+                            {t("driver.ratingLabel")}
                           </div>
                         </div>
                         <div className="rounded-lg bg-slate-50 p-2 dark:bg-slate-800/50">
@@ -740,7 +742,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                         <div className="rounded-lg bg-slate-50 p-2 dark:bg-slate-800/50">
                           <div className="font-semibold">{driver.responseRate}</div>
                           <div className="mt-0.5 text-muted">
-                            Response {/* TODO: add to i18n */}
+                            {t("driver.responseLabel")}
                           </div>
                         </div>
                       </div>
@@ -749,15 +751,15 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                       <div className="flex items-center justify-between">
                         <div>
                           <span className="text-base font-bold text-brand">
-                            Get quote {/* TODO: add to i18n */}
+                            {t("booking.getQuote")}
                           </span>
                           <span className="ml-1.5 text-xs text-muted">
-                            Driver will call to confirm price {/* TODO: add to i18n */}
+                            {t("booking.driverCallConfirm")}
                           </span>
                         </div>
                         <div className="flex gap-2">
                           <Button variant="ghost" size="sm">
-                            Profile {/* TODO: add to i18n */}
+                            {t("booking.profileBtn")}
                           </Button>
                           <Button
                             size="sm"
@@ -766,7 +768,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                               goNext();
                             }}
                           >
-                            Request {/* TODO: add to i18n */}
+                            {t("booking.requestBtn")}
                           </Button>
                         </div>
                       </div>
@@ -783,7 +785,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
           {step === 5 && selectedDriver && (
             <div className="space-y-5">
               <h2 className="font-display text-xl font-semibold">
-                Confirm booking {/* TODO: add to i18n */}
+                {t("booking.confirmTitle")}
               </h2>
 
               <DriverNameRow driver={selectedDriver} />
@@ -792,23 +794,23 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
               <Card className="p-4">
                 <div className="divide-y divide-[color:var(--surface-border)] text-sm">
                   <div className="flex justify-between py-2.5">
-                    <span className="text-muted">From</span> {/* TODO: add to i18n */}
+                    <span className="text-muted">{t("booking.fromLabel")}</span>
                     <span className="font-medium">{formState.pickup}</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-muted">To</span> {/* TODO: add to i18n */}
+                    <span className="text-muted">{t("booking.toLabel")}</span>
                     <span className="font-medium">{formState.drop}</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-muted">When</span> {/* TODO: add to i18n */}
+                    <span className="text-muted">{t("booking.whenLabel")}</span>
                     <span className="font-medium">
                       {formState.date === "today"
-                        ? `Today${formState.time === "later" && formState.scheduledTime ? `, ${formState.scheduledTime}` : ""}` // TODO: add to i18n
+                        ? `${t("booking.today")}${formState.time === "later" && formState.scheduledTime ? `, ${formState.scheduledTime}` : ""}`
                         : `${formState.scheduledDate}${formState.scheduledTime ? `, ${formState.scheduledTime}` : ""}`}
                     </span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-muted">Fare</span> {/* TODO: add to i18n */}
+                    <span className="text-muted">{t("booking.fareLabel")}</span>
                     <span className="font-bold text-brand">
                       Get quote {/* TODO: add to i18n */}
                     </span>
@@ -820,14 +822,14 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
               <div className="flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-400/30 dark:bg-amber-500/10">
                 <Info size={18} className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" />
                 <p className="text-sm text-amber-800 dark:text-amber-200">
-                  Driver will call you to confirm. Pay cash directly to driver. {/* TODO: add to i18n */}
+                  {t("booking.cashNote")}
                 </p>
               </div>
 
               <Button className="w-full" disabled={isSubmitting} onClick={handleConfirm}>
                 {isSubmitting
                   ? t("booking_submitting")
-                  : "Confirm & connect" /* TODO: add to i18n */}
+                  : t("booking.confirmBtn")}
               </Button>
             </div>
           )}
@@ -849,10 +851,10 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
 
               <div>
                 <h2 className="font-display text-2xl font-semibold">
-                  Request sent! {/* TODO: add to i18n */}
+                  {t("booking.requestSent")}
                 </h2>
                 <p className="mt-2 text-sm text-muted">
-                  {selectedDriver.name} will call you to confirm the ride and fare. If they don&apos;t call in 5 minutes, call them directly. {/* TODO: add to i18n */}
+                  {selectedDriver.name} {t("booking.requestSentSubtext")}
                 </p>
               </div>
 
@@ -868,13 +870,13 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                 >
                   <Button variant="ghost" className="w-full gap-2">
                     <MessageCircle size={16} />
-                    Message driver on WhatsApp {/* TODO: add to i18n */}
+                    {t("booking.messageWhatsApp")}
                   </Button>
                 </a>
                 <a href={`tel:+${selectedDriver.phone}`} className="flex-1">
                   <Button variant="ghost" className="w-full gap-2">
                     <Phone size={16} />
-                    Call driver {/* TODO: add to i18n */}
+                    {t("booking.callDriver")}
                   </Button>
                 </a>
               </div>
@@ -884,7 +886,7 @@ export function BookingForm({ onStepChange }: BookingFormProps) {
                 onClick={reset}
                 className="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
               >
-                Book another ride {/* TODO: add to i18n */}
+                {t("booking.bookAnother")}
               </button>
             </div>
           )}

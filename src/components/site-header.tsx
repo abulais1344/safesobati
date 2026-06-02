@@ -97,7 +97,7 @@ export function SiteHeader() {
         <p className="font-medium">{t("header_sub")}</p>
         <div className="flex items-center gap-2">
           <Smartphone size={14} className="text-brand" />
-          <span>Live route bidding and instant driver replies</span>
+          <span>{t("header.liveSubtext")}</span>
         </div>
       </div>
     </header>
